@@ -7,7 +7,7 @@ const apiRouter = require('./routes/api');
 
 const cors = require('cors'); // Import the cors package
 app.use(cors({
-  origin: 'http://localhost:' + PORT, // Allow requests from this origin
+  origin: 'http://localhost:' + 3000, // Allow requests from this origin
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
   credentials: true // If you need to send cookies or authentication headers
 }));
@@ -25,3 +25,4 @@ app.use('/api', apiRouter);
 app.listen(PORT, () => {
   console.log(`Backend is running on port ${PORT}`);
 });
+

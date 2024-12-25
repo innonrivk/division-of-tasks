@@ -25,7 +25,7 @@ function ExcelReader() {
                 setJsonData(data);
 
                 // Send JSON data to ExpressJS API
-                const response = await fetch('http://localhost:3001/api/upload-excel-names', { // Replace with your API endpoint
+                const response = await fetch('http://localhost:3001/api/excel-files/names', { 
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
