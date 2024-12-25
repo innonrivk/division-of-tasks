@@ -2,12 +2,12 @@ const express = require('express');
 const app = express();
 require('dotenv').config()
 const PORT = process.env.PORT; //env variables, requires .env file
-
+const CLIENTPORT = process.send.CLIENT-PORT;
 const apiRouter = require('./routes/api');
 
 const cors = require('cors'); // Import the cors package
 app.use(cors({
-  origin: 'http://localhost:' + 3000, // Allow requests from this origin
+  origin: 'http://localhost:' + CLIENTPORT, // Allow requests from this origin
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
   credentials: true // If you need to send cookies or authentication headers
 }));
