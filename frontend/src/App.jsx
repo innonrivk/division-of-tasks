@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import MainRouter from './Route/MainRouter.tsx'
+import MainRouter from './Route/MainRouter.jsx'
 function App() {
   const [count, setCount] = useState(0)
 

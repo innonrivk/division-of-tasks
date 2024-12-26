@@ -1,15 +1,15 @@
 import React from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-
-function MainRouter(props) {
+import NameFileUploadScreen from '../Screens/NameFileUploadScreen';
+function MainRouter() {
 
 
   return (
     <div>
       <Router>
         <Routes>
-          <Route path="/" element={<>asdc</>} />
-          <Route path="/files" element={<>sdas</>} />
+          <Route path="/" element={<NameFileUploadScreen/>} />
+          <Route path="/files" element={<NameFileUploadScreen/>} />
         </Routes>
       </Router>
     </div>
