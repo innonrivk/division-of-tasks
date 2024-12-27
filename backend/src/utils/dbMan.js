@@ -4,33 +4,33 @@ function createTable(users) {
     return new Promise((resolve, reject) => {
         db.serialize(() => {
             db.run(`CREATE TABLE IF NOT EXISTS users (
-                unit text NOT NULL,
-                frame text NOT NULL,
-                service_number INTEGER PRIMARY KEY, 
-                full_name text NOT NULL, 
-                rank text NOT NULL, 
-                service_type text NOT NULL, 
-                job text NOT NULL, 
-                phone_number text NOT NULL, 
-                end_of_service DATE);`, (err) => {
+                מסגרת Ntext NOT NULL,
+                מספר_אישי INTEGER NOT NULL PRIMARY KEY, 
+                שם_פרטי Ntext NOT NULL, 
+                דרגה Ntext NOT NULL, 
+                סוג_שירות Ntext NOT NULL, 
+                עיסוק Ntext NOT NULL, 
+                מספר_טלפון Ntext NOT NULL,
+                יחידה_ארגונית Ntext NOT NULL, 
+                תאריך_תום_שחרור Ntext NOT NULL);`, (err) => {
                 if(err) {
-                    reject(err)
+                    reject(err.msg)
                 }
             });
         });
 
         const stmt = db.prepare(`INSERT INTO users (
-            unit, 
-            frame, 
-            service_number, 
-            full_name,
-            rank, 
-            service_type, 
-            job, 
-            phone_number, 
-            end_of_service) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`)
-            users.forEach(user => { 
-            stmt.run(user.unit, user.frame, user.service_number, user.full_name, user.rank, user.service_type, user.job, user.phone_number, user.end_of_service, (err) => {
+            מסגרת, 
+            מספר_אישי, 
+            שם_פרטי, 
+            דרגה,
+            סוג_שירות, 
+            עיסוק, 
+            מספר_טלפון, 
+            יחידה_ארגונית, 
+            תאריך_תום_שחרור) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`)
+            users.forEach(user => {
+            stmt.run(user["מסגרת"], user["מספר אישי"], user["שם פרטי"], user["דרגה"], user["סוג שירות"], user["עיסוק"], user["מספר טלפון"], user["יחידה ארגונית"], user["תאריך תום שחרור"], (err) => {
                 if (err) {
                     reject(err)
                 }
