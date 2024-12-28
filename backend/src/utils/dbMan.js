@@ -17,30 +17,30 @@ function createTable(users) {
                     reject(err.msg)
                 }
             });
-        });
 
-        const stmt = db.prepare(`INSERT INTO users (
-            מסגרת, 
-            מספר_אישי, 
-            שם_פרטי, 
-            דרגה,
-            סוג_שירות, 
-            עיסוק, 
-            מספר_טלפון, 
-            יחידה_ארגונית, 
-            תאריך_תום_שחרור) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`)
-            users.forEach(user => {
-            stmt.run(user["מסגרת"], user["מספר אישי"], user["שם פרטי"], user["דרגה"], user["סוג שירות"], user["עיסוק"], user["מספר טלפון"], user["יחידה ארגונית"], user["תאריך תום שחרור"], (err) => {
-                if (err) {
-                    reject(err)
+            const stmt = db.prepare(`INSERT INTO users (
+                מסגרת, 
+                מספר_אישי, 
+                שם_פרטי, 
+                דרגה,
+                סוג_שירות, 
+                עיסוק, 
+                מספר_טלפון, 
+                יחידה_ארגונית, 
+                תאריך_תום_שחרור) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`)
+                users.forEach(user => {
+                stmt.run(user["מסגרת"], user["מספר אישי"], user["שם פרטי"], user["דרגה"], user["סוג שירות"], user["עיסוק"], user["מספר טלפון"], user["יחידה ארגונית"], user["תאריך תום שחרור"], (err) => {
+                    if (err) {
+                        reject(err)
+                    }
+                })
+            })
+
+            stmt.finalize((err) => {
+                if (!err) {
+                    resolve('user data inserted successfully')
                 }
             })
-        })
-
-        stmt.finalize((err) => {
-            if (!err) {
-                resolve('user data inserted successfully')
-            }
         })
     })
 }
