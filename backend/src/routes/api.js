@@ -20,29 +20,29 @@ const upload = multer({
     }
 })
 
-router.post('/fileUpload/name', upload.single('file'),async (req, res) => {
+router.post('/file', upload.single('file'),async (req, res) => {
     try {
         if (!req.file) {
             return res.status(400).send('No file uploaded.')
         }
-        const jsonData = await parseExcel(req.file.path)
+        const jsonData = await parseExcel(req.file)
     
         fs.unlink(req.file.path, (err) => {
             if (err) console.error('Error deleting file: ', err)
         })
-        await dbMan.createTable(jsonData)
+        await dbMan.createTable(jsonData[0], jsonData[1])
         res.status(200).json({message: 'Excel data received successfully'})
     } catch (err) {
-        res.status(500).send(err.message)
+        res.status(500).send(err)
     }
 })
 
-router.get('/getFile/name', async (req, res) => {
+router.get('/file', async (req, res) => {
     try{
         const users = await dbMan.getUsers()
         res.status(200).json(users)
     } catch (err){
-        res.status(500).send(err.message)
+        res.status(500).send(err)
     }
 })
 

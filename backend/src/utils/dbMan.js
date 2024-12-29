@@ -1,9 +1,18 @@
 const db = require("../db/connection")
 
-function createTable(users) {
+function isValidateTableName(tableName) {
+    const pattern = /^[a-zA-Z][a-zA-Z0-9_]{2,15}$/
+    return pattern.test(tableName)
+}
+
+function createTable(users, tableName) {
     return new Promise((resolve, reject) => {
         db.serialize(() => {
-            db.run(`CREATE TABLE IF NOT EXISTS users (
+            if (!tableName || !isValidateTableName(tableName)) {
+                reject({error: "Invalid table name"})
+            }
+
+            db.run(`CREATE TABLE IF NOT EXISTS ${tableName} (
                 מסגרת Ntext NOT NULL,
                 מספר_אישי INTEGER NOT NULL PRIMARY KEY, 
                 שם_פרטי Ntext NOT NULL, 
@@ -14,11 +23,11 @@ function createTable(users) {
                 יחידה_ארגונית Ntext NOT NULL, 
                 תאריך_תום_שחרור Ntext NOT NULL);`, (err) => {
                 if(err) {
-                    reject(err.msg)
+                    reject(err)
                 }
             });
 
-            const stmt = db.prepare(`INSERT INTO users (
+            const stmt = db.prepare(`INSERT INTO ${tableName} (
                 מסגרת, 
                 מספר_אישי, 
                 שם_פרטי, 
@@ -46,9 +55,8 @@ function createTable(users) {
 }
 
 function getUsers() {
-
     return new Promise((resolve, reject) => {
-        db.all('SELECT * from users', (err, rows) => {
+        db.all(`SELECT * FROM users`, (err, rows) => {
             if(err) {
                 reject(err)
             } else {

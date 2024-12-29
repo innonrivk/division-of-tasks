@@ -1,9 +1,10 @@
 const xl = require('exceljs')
 
 async function parseExcel(file) {
-
+    const fileName = file.originalname
+    
     const workbook = new xl.Workbook()
-    await workbook.xlsx.readFile(file)
+    await workbook.xlsx.readFile(file.path)
     const worksheet = workbook.worksheets[0]
 
     const rows = []
@@ -20,8 +21,7 @@ async function parseExcel(file) {
             rows.push(rowData)
         }
     })
-
-    return rows
+    return [rows, fileName.substring(0, fileName.indexOf('.'))]
 }
 
 module.exports = parseExcel;
