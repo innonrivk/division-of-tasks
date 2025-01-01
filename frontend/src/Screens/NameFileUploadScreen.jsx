@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import FileBrowser from '../Assets/Components/FileBrowser'
 import DragAndDrop from '../Assets/Components/DragAndDrop'
 import FileUploader from '../Assets/Components/FileUploader'
 import "./NameFileUploadScreen.css"

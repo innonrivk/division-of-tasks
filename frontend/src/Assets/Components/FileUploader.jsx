@@ -23,7 +23,7 @@ const FileUploader = (props) => {
     formData.append("file", file);
 
     try {
-      await axios.post("http://localhost:3001/file", formData, {
+      await axios.post("http://localhost:3001/api/file", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         }, 
@@ -38,7 +38,6 @@ const FileUploader = (props) => {
       alert("Failed to upload file. Please try again.");
     } finally {
       setIsUploading(false);
-      props.setFile(null);
       props.reset()
     }
   };
