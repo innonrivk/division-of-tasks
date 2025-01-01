@@ -38,6 +38,7 @@ const FileUploader = (props) => {
       alert("Failed to upload file. Please try again.");
     } finally {
       setIsUploading(false);
+      setUploadProgress(0);
       props.reset()
     }
   };
