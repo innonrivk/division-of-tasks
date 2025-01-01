@@ -1,13 +1,28 @@
 const express = require('express');
 const app = express();
-const PORT = 3001;
+require('dotenv').config();
+const PORT = process.env.PORT; //env variables, requires .env file
+const CLIENTPORT = process.env.CLIENTPORT;
+const apiRouter = require('./routes/api');
 
+const cors = require('cors'); // Import the cors package
+app.use(cors({
+  origin: 'http://localhost:' + CLIENTPORT, // Allow requests from this origin
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+  credentials: true // If you need to send cookies or authentication headers
+}));
+
+// middelware to parse json bodies
 app.use(express.json());
 
-app.get('/api/hello', (req, res) => {
-  res.json({ message: 'Hello from Express!' });
+// Root route to confirm server is running
+app.get('/', (req, res) => {
+  res.status(200).json({connection: true});
 });
+
+app.use('/api', apiRouter);
 
 app.listen(PORT, () => {
   console.log(`Backend is running on port ${PORT}`);
 });
+
