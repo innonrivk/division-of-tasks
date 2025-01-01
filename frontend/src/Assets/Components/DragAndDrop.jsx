@@ -6,20 +6,21 @@ const fileTypes = ["xls", "xlsx"];
 
 
 function DragAndDrop(props) {
-  const [file, setFile] = useState("")
-
+  const [fileName, setFileName] = useState("")
 useEffect(() => {
-    setFile("")
+    setFileName("")
 
 }, [props.reset]) 
 
 
   const onDrop = ((acceptedFiles) => {
-    const file = acceptedFiles[0]
-    setFile(file["name"])
+    const newFile = acceptedFiles[0]
+    props.setFile(newFile)
+    setFileName(newFile["name"])
+
     try {
-      if (file) {
-        console.log("file", file)
+      if (newFile) {
+        console.log("file", newFile)
       }
     }
     catch (err) {
@@ -28,10 +29,7 @@ useEffect(() => {
 
   })
 
-  const clickHandler = () => {
-    console.log("click")
-    setFile("")
-  }
+
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
@@ -41,7 +39,7 @@ useEffect(() => {
       className: `dropzone ${isDragActive ? "dropzone-active" : ""}`,
     })}>
       <input {...getInputProps()} />
-      {file != "" ?  <p>{file}</p>:<p>גרור קובץ לכאן</p>}
+      {fileName != "" ?  <p>{fileName}</p>:<p>גרור קובץ לכאן</p>}
       <button>חפש</button>
 
     </div>
