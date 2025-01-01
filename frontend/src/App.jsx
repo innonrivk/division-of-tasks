@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import MainRouter from './Route/MainRouter.jsx'
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -10,4 +9,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
