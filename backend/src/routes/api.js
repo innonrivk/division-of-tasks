@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
-const fs = require('fs');
 const dbMan = require("../utils/dbMan");
 const parseExcel = require("../utils/excelParser");
 
@@ -27,13 +26,11 @@ router.post('/file', upload.single('file'),async (req, res) => {
         }
         const jsonData = await parseExcel(req.file)
     
-        fs.unlink(req.file.path, (err) => {
-            if (err) console.error('Error deleting file: ', err)
-        })
         await dbMan.createTable(jsonData[0], jsonData[1])
         res.status(200).json({message: 'Excel data received successfully'})
     } catch (err) {
-        res.status(500).send(err)
+        console.error(err)
+        res.status(500).send(err.message)
     }
 })
 

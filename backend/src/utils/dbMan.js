@@ -13,6 +13,8 @@ class DatabaseManager {
                     reject({error : "Invalid file name"})
                 }
 
+                db.run(`DROP TABLE IF EXISTS ${tableName}`)
+
                 db.run(`CREATE TABLE IF NOT EXISTS ${tableName} (
                     מסגרת Ntext NOT NULL,
                     מספר_אישי INTEGER NOT NULL PRIMARY KEY,
