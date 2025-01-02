@@ -14,7 +14,7 @@ const upload = multer({
         if(extName) {
             return cb(null, true)
         } else {
-            cb(new Error('Only Excel filess are allowed'))
+            cb(new Error({message: 'Only Excel filess are allowed', code : 415}))
         }
     }
 })
@@ -26,11 +26,10 @@ router.post('/file', upload.single('file'),async (req, res) => {
         }
         const jsonData = await parseExcel(req.file)
     
-        await dbMan.createTable(jsonData[0], jsonData[1])
-        res.status(200).json({message: 'Excel data received successfully'})
+        const ans = await dbMan.createTable(jsonData[0], jsonData[1])
+        res.status(ans.code).json(ans.message)
     } catch (err) {
-        console.error(err)
-        res.status(500).send(err.message)
+        res.status(err.code).send(err.message)
     }
 })
 

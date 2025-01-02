@@ -19,16 +19,16 @@ async function parseExcel(file) {
                 headers.push(...row.values)
                 header.forEach(head => {
                     if (!headers.includes(head)) {
-                        throw new Error(`There is no ${head} column in this file`)
+                        throw new Error({message: `There is no ${head} column in this file`, code: 400})
                     }
                 })
             } else {
                 const rowData = {};
                 row.values.forEach((value, index) => {
-                    if(typeof(value)) {
+                    if(value===null || value===undefined) {
                         throw new Error(`Value is undefined`)
                     }
-                    utils.validateUserInput(headers[index], value)       
+                    utils.validateUserInput(headers[index], value, rowIndex)       
                     rowData[headers[index]] = value
                 })
                 rows.push(rowData)
@@ -39,7 +39,7 @@ async function parseExcel(file) {
         return [rows, fileName.substring(0, fileName.indexOf('.'))]
     } catch (error) {
         utils.unlinkFile(file.path)
-        throw new Error(error)
+        throw error
     }
 }
 

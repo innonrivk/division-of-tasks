@@ -16,30 +16,30 @@ class DatabaseManager {
                 db.run(`DROP TABLE IF EXISTS ${tableName}`)
 
                 db.run(`CREATE TABLE IF NOT EXISTS ${tableName} (
-                    מסגרת Ntext NOT NULL,
-                    מספר_אישי INTEGER NOT NULL PRIMARY KEY,
-                    שם_פרטי Ntext NOT NULL,
-                    דרגה Ntext NOT NULL,
-                    סוג_שירות Ntext NOT NULL,
-                    עיסוק  Ntext NOT NULL,
-                    מספר_טלפון Ntext NOT NULL,
-                    יחידה_ארגונית Ntext NOT NULL,
-                    תאריך_תום_שחרור NTEXT NOT NULL);`, (error) => {
-                        if(error) {
+                    frame Ntext NOT NULL,
+                    id INTEGER NOT NULL PRIMARY KEY,
+                    full_name Ntext NOT NULL,
+                    rank Ntext NOT NULL,
+                    service_type Ntext NOT NULL,
+                    job  Ntext NOT NULL,
+                    phone_number Ntext NOT NULL,
+                    unit Ntext NOT NULL,
+                    end_of_service_date NTEXT NOT NULL);`, (err) => {
+                        if(err) {
                             reject(error)
                         }
                 })
 
                 const stmt = db.prepare(`INSERT INTO ${tableName} (
-                    מסגרת,
-                    מספר_אישי,
-                    שם_פרטי,
-                    דרגה,
-                    סוג_שירות,
-                    עיסוק,
-                    מספר_טלפון,
-                    יחידה_ארגונית,
-                    תאריך_תום_שחרור
+                    frame,
+                    id,
+                    full_name,
+                    rank,
+                    service_type,
+                    job,
+                    phone_number,
+                    unit,
+                    end_of_service_date
                     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`)
                     
                 users.forEach(user => {
@@ -63,7 +63,7 @@ class DatabaseManager {
 
                 stmt.finalize((error) => {
                     if (!error) {
-                        resolve("User data inserted successfully")
+                        resolve({message: "User data inserted successfully", code : 201})
                     }
                 })
             })
@@ -76,7 +76,7 @@ class DatabaseManager {
                 if(error){
                     reject(error)
                 } else {
-                    resolve(rows)
+                    resolve({message: rows, code : 200})
                 }
             })
         })
