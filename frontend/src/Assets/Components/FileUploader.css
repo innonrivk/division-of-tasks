@@ -1,50 +1,57 @@
+.file-uploader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start
+  ;
+  width: 100%;
+  height: 100%;
+}
+
 .progress-bar-container {
-    width: 100%;
-    height: 20px;
-    background-color: #f3f3f3;
-    border-radius: 10px;
-    margin: 20px 0;
-    position: relative;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .progress-bar {
-    height: 100%;
-    background-color: #4caf50;
-    border-radius: 10px;
-    transition: width 0.3s;
-
-  }
-  
-  .progress-bar p {
-    margin: 0;
-    padding: 0;
-    color: rgb(0, 0, 0);
-    font-weight: bold;
-  }
-
-.component-upload-btn{
-    width: 100%;
-    height: 100%;
-    display:   flex;
-    align-items:end;
-    justify-content: center; 
-
+  width: 80%;
+  height: 30px;
+  background-color: #e0e0e0;
+  border-radius: 15px;
+  overflow: hidden;
+  margin: 20px 0;
+  position: relative;
 }
-.component-upload-btn button{
-    width: 50%;
-    aspect-ratio: 3;
-    background-color: brown;
- 
-    
+
+.progress-bar {
+  height: 100%;
+  background-color: #4caf50;
+  border-radius: 15px;
+  transition: width 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
 }
-.component-upload-btn p{
-    margin: 0;
-    padding: 0;
-    color: rgb(255, 255, 255);
-    font-weight: bold;
+
+.upload-button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
-.component-upload-btn button:hover{
-    background-color: #8B4513;
+
+.upload-button-container button {
+  width: 50%;
+  padding: 10px;
+  background-color: brown;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.upload-button-container button:hover {
+  background-color: #8B4513;
+}
+
+.upload-button-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }

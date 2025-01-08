@@ -1,18 +1,18 @@
 // FileUploader.jsx
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
-const CHUNK_SIZE = 1024 * 1024; // 1MB
 import "./FileUploader.css";
 
 const FileUploader = (props) => {
   const [file, setFile] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [isUploading, setIsUploading] = useState(false);
+  const API_URL = "http://localhost:3001/api/file";
 
   useEffect(() => {  
-    setFile(props.file)
-    console.log("file", props.file)
-  }, [props.file])
+    setFile(props.file);
+    console.log("file", props.file);
+  }, [props.file]);
 
   const uploadFile = async () => {
     if (!file) return;
@@ -23,7 +23,7 @@ const FileUploader = (props) => {
     formData.append("file", file);
 
     try {
-      await axios.post("http://localhost:3001/api/file", formData, {
+      await axios.post(API_URL, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         }, 
@@ -39,31 +39,24 @@ const FileUploader = (props) => {
     } finally {
       setIsUploading(false);
       setUploadProgress(0);
-      props.reset()
+      props.reset();
     }
   };
 
   return (
-    <div>
-    <div className="progress-bar-container" >
-        <div className="progress-bar"
-          style={{
-            width: `${uploadProgress}%`,
-          }}
-        ><p>{uploadProgress}%</p></div>
-        
-      </div>
-      <div className='container-component-upload-btn '>
-        <div className='component-upload-btn'>
-          <button onClick={uploadFile} disabled={isUploading || !file}>  
-          {isUploading ? <p>מעלה... </p>: <p>העלאה</p>}
-          </button>
+    <div className="file-uploader">
+      <div className="progress-bar-container">
+        <div className="progress-bar" style={{ width: `${uploadProgress}%` }}>
+          {uploadProgress}%
         </div>
-     
       </div>
+      <div className="upload-button-container">
+        <button onClick={uploadFile} disabled={isUploading || !file}>
+          {isUploading ? "מעלה..." : "העלאה"}
+        </button>
       </div>
+    </div>
   );
 };
-
 
 export default FileUploader;

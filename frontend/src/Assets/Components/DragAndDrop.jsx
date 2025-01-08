@@ -1,49 +1,46 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { FileUploader } from "react-drag-drop-files";
-import { useDropzone } from 'react-dropzone'
-import './DragAndDrop.css'
-const fileTypes = ["xls", "xlsx"];
+import React, { useCallback, useEffect, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
+import './DragAndDrop.css';
 
 
 function DragAndDrop(props) {
-  const [fileName, setFileName] = useState("")
-useEffect(() => {
-    setFileName("")
+  const [fileName, setFileName] = useState("");
 
-}, [props.reset]) 
+  useEffect(() => {
+    setFileName("");
+  }, [props.reset]);
 
-
-  const onDrop = ((acceptedFiles) => {
-    const newFile = acceptedFiles[0]
-    props.setFile(newFile)
-    setFileName(newFile["name"])
+  const onDrop = useCallback((acceptedFiles) => {
+    const newFile = acceptedFiles[0];
 
     try {
       if (newFile) {
-        console.log("file", newFile)
+        props.setFile(newFile);
+        setFileName(newFile.name);
+        console.log("file", newFile);
       }
+    } catch (error) {
+      console.error("Error handling file:", error);
     }
-    catch (err) {
-      console.log(err)
-    }
+  }, [props]);
 
-  })
-
-
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
-
+  const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
+    onDrop,
+    noClick: true,
+    noKeyboard: true
+  });
 
   return (
-    <div {...getRootProps({
-      className: `dropzone ${isDragActive ? "dropzone-active" : ""}`,
-    })}>
-      <input {...getInputProps()} />
-      {fileName != "" ?  <p>{fileName}</p>:<p>גרור קובץ לכאן</p>}
-      <button>חפש</button>
-
+    <div className="drag-and-drop-container">
+      <div {...getRootProps({ className: `dropzone ${isDragActive ? 'dropzone-active' : ''}` })}>
+        <input {...getInputProps()} />
+        {fileName !== "" ? <p>{fileName}</p> : <p>גרור קובץ לכאן</p>}
+        <button onClick={open} className="search-button">
+          חפש
+        </button>
+      </div>
     </div>
-  )
-
+  );
 }
-export default DragAndDrop
+
+export default DragAndDrop;

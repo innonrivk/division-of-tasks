@@ -1,27 +1,57 @@
-.dropzone {
+.drag-and-drop-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100%;
+  }
+  
+  .dropzone {
+    width: 80%;
+    height: 200px;
     border: 5px dashed #cccccc;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 20px;
     text-align: center;
     transition: border 0.3s ease-in-out;
     background-color: #f9f9f9;
-
-}
-
-.dropzone-active {
-    transition:ease-in-out;
-    border: 3px dashed #00bfff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .dropzone-active {
+    border: 5px dashed #00bfff;
     background-color: rgba(90, 197, 90, 0.781);
-}
-
-.dropzone p {
+  }
+  
+  .dropzone p {
     padding: 2.6rem;
     font-size: 16px;
     color: #666666;
-}
-.dropzone button{
+  }
+  
+  .search-button {
     width: 40%;
-    aspect-ratio: 6;
-}
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+  }
+  
+  .search-button:hover {
+    background-color: #333333;
+  }
+  
+  .search-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
