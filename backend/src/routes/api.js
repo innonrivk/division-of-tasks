@@ -33,11 +33,29 @@ router.post('/file', upload.single('file'),async (req, res) => {
     }
 })
 
+router.post('/missions', async(req, res) => {
+    try {
+        const ans = await dbMan.createMissionTable(req.body)
+        res.status(ans.code).send(ans.message)
+    } catch (err){
+        res.status(500).send(err)
+    }
+})
+
 router.get('/file', async (req, res) => {
     try{
         const users = await dbMan.getUsers()
         res.status(200).json(users)
     } catch (err){
+        res.status(500).send(err)
+    }
+})
+
+router.get('/missions', async(req, res) => {
+    try {
+        const missions = await dbMan.getMissions()
+        res.status(200).json(missions)
+    } catch (err) {
         res.status(500).send(err)
     }
 })
