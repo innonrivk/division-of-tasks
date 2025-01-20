@@ -13,31 +13,33 @@ class DatabaseManager {
                     reject({error : "Invalid file name"})
                 }
 
+                db.run(`DROP TABLE IF EXISTS ${tableName}`) // instead of updating we are just running over the current data
+
                 db.run(`CREATE TABLE IF NOT EXISTS ${tableName} (
-                    מסגרת Ntext NOT NULL,
-                    מספר_אישי INTEGER NOT NULL PRIMARY KEY,
-                    שם_פרטי Ntext NOT NULL,
-                    דרגה Ntext NOT NULL,
-                    סוג_שירות Ntext NOT NULL,
-                    עיסוק  Ntext NOT NULL,
-                    מספר_טלפון Ntext NOT NULL,
-                    יחידה_ארגונית Ntext NOT NULL,
-                    תאריך_תום_שחרור NTEXT NOT NULL);`, (error) => {
-                        if(error) {
+                    frame Ntext NOT NULL,
+                    id INTEGER NOT NULL PRIMARY KEY,
+                    full_name Ntext NOT NULL,
+                    rank Ntext NOT NULL,
+                    service_type Ntext NOT NULL,
+                    job Ntext NOT NULL,
+                    phone_number Ntext NOT NULL,
+                    unit Ntext NOT NULL,
+                    end_of_service_date NTEXT NOT NULL);`, (err) => {
+                        if(err) {
                             reject(error)
                         }
                 })
 
                 const stmt = db.prepare(`INSERT INTO ${tableName} (
-                    מסגרת,
-                    מספר_אישי,
-                    שם_פרטי,
-                    דרגה,
-                    סוג_שירות,
-                    עיסוק,
-                    מספר_טלפון,
-                    יחידה_ארגונית,
-                    תאריך_תום_שחרור
+                    frame,
+                    id,
+                    full_name,
+                    rank,
+                    service_type,
+                    job,
+                    phone_number,
+                    unit,
+                    end_of_service_date
                     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`)
                     
                 users.forEach(user => {
@@ -60,8 +62,10 @@ class DatabaseManager {
                 })
 
                 stmt.finalize((error) => {
-                    if (!error) {
-                        resolve("User data inserted successfully")
+                    if (error) {
+                        reject(error)
+                    } else {
+                        resolve({message: "User data inserted successfully", code : 201})
                     }
                 })
             })
@@ -73,6 +77,73 @@ class DatabaseManager {
             db.all(`SELECT * FROM users`, (error, rows) => {
                 if(error){
                     reject(error)
+                } else {
+                    resolve({message: rows, code : 200})
+                }
+            })
+        })
+    }
+
+    static createMissionTable(missions) {
+        return new Promise((resolve, reject) => {
+            db.serialize(() => {
+                db.run(`DROP TABLE IF EXISTS currentMissions`)
+
+                db.run(`CREATE TABLE IF NOT EXISTS currentMissions (
+                    id INTEGER NOT NULL PRIMARY KEY,
+                    name NTEXT NOT NULL,
+                    start_date NTEXT NOT NULL,
+                    end_date NTEXT NOT NULL,
+                    score INTEGER NOT NULL,
+                    percentage INTEGER NOT NULL,
+                    is_permanent INTEGER NOT NULL CHECK(is_permanent IN (0, 1)));`, (err) => {
+                        if (err) {
+                            reject(err)
+                        }
+                    })
+                
+                const stmt = db.prepare(`INSERT INTO currentMissions (
+                    name,
+                    start_date,
+                    end_date,
+                    score,
+                    percentage,
+                    is_permanent
+                    ) VALUES (?, ?, ?, ?, ?, ?);`)
+                
+                missions.forEach(mission => {
+                    stmt.run(
+                        mission["name"],
+                        mission["start_date"],
+                        mission["end_date"],
+                        mission["score"],
+                        mission["percentage"],
+                        mission["is_permanent"],
+                        (err) => {
+                            if (err) {
+                                reject(err)
+                            }
+                        }
+                    )
+                })
+
+                stmt.finalize((err) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve({message: "missions inserted successfully", code: 201})
+                    }
+                })
+            }) 
+        })
+    }
+
+    static getMissions() {
+        //this function is only for checking the data that was inserted into the db
+        return new Promise((resolve, reject) => {
+            db.all(`SELECT * FROM currentMissions`, (err, rows) => {
+                if (err) {
+                    reject(err)
                 } else {
                     resolve(rows)
                 }

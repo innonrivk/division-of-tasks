@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
-require('dotenv').config();
+
+require('dotenv').config()
 const PORT = process.env.PORT; //env variables, requires .env file
 const CLIENTPORT = process.env.CLIENTPORT;
 const apiRouter = require('./routes/api');
