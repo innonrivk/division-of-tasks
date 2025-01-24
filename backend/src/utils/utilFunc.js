@@ -1,4 +1,3 @@
-const { query } = require('express');
 const fs = require('fs');
 
 class utils{
@@ -41,6 +40,17 @@ class utils{
                     throw new Error({message: `forbidden char at ${value}, at row ${rowIndex} and column ${header}`, code: 422})
                 }
         }
+    }
+
+    static translatePerc(mission) {
+        const lst = mission.split(",")
+        const rowData = {}
+        for(var i = 0; i < lst.length; i++){
+            const data = lst[i].split(":")
+            rowData[data[0]] = parseInt(data[1])
+        }
+
+        return rowData;
     }
 }
 

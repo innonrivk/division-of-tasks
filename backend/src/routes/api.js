@@ -4,6 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const dbMan = require("../utils/dbMan");
 const parseExcel = require("../utils/excelParser");
+const algo = require('../utils/algo')
 
 const upload = multer({
     dest: 'uploads/',
@@ -47,7 +48,7 @@ router.get('/file', async (req, res) => {
         const users = await dbMan.getUsers()
         res.status(200).json(users)
     } catch (err){
-        res.status(500).send(err)
+        res.status(err.code).send(err.message)
     }
 })
 
@@ -56,6 +57,16 @@ router.get('/missions', async(req, res) => {
         const missions = await dbMan.getMissions()
         res.status(200).json(missions)
     } catch (err) {
+        res.status(500).send(err)
+    }
+})
+
+router.get('/excel', async(req, res) => {
+    try{
+        algo.main()
+        res.status(200).send("done")
+    } catch (err) {
+        console.error(err)
         res.status(500).send(err)
     }
 })
