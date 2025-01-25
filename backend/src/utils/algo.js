@@ -3,24 +3,11 @@ const utils = require("./utilFunc")
 
 class algo{
     static async main() {
-        try{
-            let missions = await dbMan.getMissions()
-            missions = await this.updatePerc(missions)
-            console.log(missions)
-        } catch (error) {
-            return error
-        }
-    }
-
-    static updatePerc(missions) {
-        try{
-            for(var i = 0; i < missions.length; i++) {
-                missions[i].percentage = utils.translatePerc(missions[i]["percentage"])
-            }
-            return missions
-        } catch (err) {
-            return err
-        }
+        let missions = await dbMan.getMissions()
+        missions = await utils.updatePerc(missions)
+        utils.checkPerc(missions)
+        missions = await utils.getPeople(missions)
+        console.log(missions)
     }
 }
 

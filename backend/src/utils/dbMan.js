@@ -121,7 +121,7 @@ class DatabaseManager {
                         mission["start_date"],
                         mission["end_date"],
                         mission["score"],
-                        mission["percentage"],
+                        JSON.stringify(mission["percentage"]),
                         mission["is_permanent"],
                         (err) => {
                             if (err) {

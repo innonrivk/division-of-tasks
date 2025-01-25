@@ -15,7 +15,7 @@ const upload = multer({
         if(extName) {
             return cb(null, true)
         } else {
-            cb(new Error({message: 'Only Excel filess are allowed', code : 415}))
+            cb({message: 'Only Excel filess are allowed', code : 415})
         }
     }
 })
@@ -63,11 +63,10 @@ router.get('/missions', async(req, res) => {
 
 router.get('/excel', async(req, res) => {
     try{
-        algo.main()
+        await algo.main()
         res.status(200).send("done")
     } catch (err) {
-        console.error(err)
-        res.status(500).send(err)
+        res.status(err.code).send(err.message)
     }
 })
 
