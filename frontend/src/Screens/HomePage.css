@@ -15,12 +15,15 @@
   .button-container {
     display: flex;
     align-items: center;
+    flex-direction: column;
     justify-content: center;
     margin: 20px;
   }
   
   /* Styling for the navigate button */
   .navigate-button {
+    margin-top: 5%;
+    margin-bottom: 5%;
     padding: 20px 40px; /* Increased padding for a bigger button */
     font-size: 20px; /* Increased font size */
     color: #ffffff; /* White text */

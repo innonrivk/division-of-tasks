@@ -11,6 +11,9 @@ function HomePage() {
         <button className="navigate-button" onClick={() => { navigate('/files') }}>
           העלאת קובץ שמות
         </button>
+        <button className="navigate-button" onClick={() => { navigate('/mission') }}>
+          העלאת משימות
+        </button>
       </div>
     </div>
   );

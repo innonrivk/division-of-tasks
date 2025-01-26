@@ -1,0 +1,120 @@
+/* MissionUploadScreen.css */
+.container-mission-upload {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+.go-back-btn {
+    position: absolute;
+
+    top: 20px;
+    left: 20px;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #ffffff; /* White text */
+    background-color: #ff0000; /* Red background */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+.mission-panel-container {
+
+   
+    width: 60vw;
+    height: 80vh;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+   
+    
+    background-color: hsl(0, 0%, 90%);
+}
+
+
+
+
+
+.create-mission-btn{
+    grid-column: 7 /  9;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:  0.3s;
+}
+.create-mission-btn button{
+    padding: 10px;
+    width: 60%;
+    height: 50%;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+.create-mission-btn button:hover{
+    background-color: #45a049;
+}
+
+
+
+.main-erea-fragment{
+    background-color: tomato;
+    display: flex;
+    grid-column: 4 / 8;
+    grid-row: 2/8 ;
+}
+
+
+.mission-cards-list-fragment{
+    background-color: #34b045;
+    margin-right: 8%;
+    margin-left: 8%;
+    grid-column: 1 / 4;
+    grid-row: 2/8 ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.send-mission-btn{
+    grid-column: 1 / 4;
+    grid-row: 8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:  0.3s;
+}
+.send-mission-btn button{
+    padding: 10px;
+    width: 60%;
+    height: 50%;
+    background-color: #4caf89;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+.send-mission-btn button:hover{
+    background-color: #46a27f;
+}
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .container-component-drag-and-drop,
+    .container-component-upload-btn {
+      width: 90%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .container-component-drag-and-drop,
+    .container-component-upload-btn {
+      width: 100%;
+    }
+  }
