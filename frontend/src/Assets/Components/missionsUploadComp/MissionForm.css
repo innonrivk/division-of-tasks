@@ -25,15 +25,20 @@
 }
 
 .mission-form-score-input {
-    grid-column: 4 / 6;
+    grid-column: 4 / 8;
     grid-row: 2 / span 2;
  display: flex;
     justify-content: center;
     align-items: center;
 }
+.mission-form-score-input p{
+    margin: 0;
+    font-size: small;
+    color: #000;
+}
 .mission-form-score-input input {
-    width: 33%;
-    aspect-ratio: 1;
+    margin-right: 5%;
+    width: 40%;
     font-size:x-small;
     padding: 10px;
     text-align: center;
@@ -47,13 +52,42 @@
 }
 
 
+.mission-total-manpower-input {
+    grid-column: 4 / 8 ;
+    grid-row: 3 / span 2;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.mission-total-manpower-input input {
+    width: 40%;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: x-small;
+    border: 1px solid black;
+}
+
+.mission-total-manpower-input input::-webkit-outer-spin-button,
+.mission-total-manpower-input input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.mission-total-manpower-input p{
+    margin: 0;
+    font-size: small;
+    color: #000;
+}   
 
 .mission-form-dates-input {
     grid-column: 2 / span 6;
-    grid-row: 3 / span 2;
+    grid-row: 4 / span 2;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
+
+
+
 
 .mission-form-starting-date-input{
     
@@ -101,4 +135,31 @@
     border-radius: 5px;
     border: 1px solid black;
     
+}
+
+.mission-is-fixed-input{
+    grid-column: 1 / span 3;
+    grid-row: 8 ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mission-is-fixed-input input{
+    width: 20%;
+    aspect-ratio: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.mission-is-fixed-input p{
+    margin: 0;
+    font-size: small;
+    color: #000;
+}   
+
+
+.mission-split-fragments{
+    grid-column:  1 / span 8;  
+    grid-row: 6 / span 2;
 }

@@ -1,0 +1,50 @@
+.mission-split-input-container{
+    margin: 1px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-color: #000;
+    border-style:ridge ;
+    border-radius: 5px;
+    border-width: 3px;
+    width: 70%;
+}
+.mission-split-input-container p{
+    margin: 0;
+    margin-left: 1%;
+    margin-right: 1%;
+    font-size: x-large;
+    color: #000;
+}
+.mission-split-input-container input{
+    text-align: right;
+    width: 25%;
+    height: 10%;
+    
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.mission-split-input-container input[type="number"]{
+        width: 25%;      
+        text-align: center;
+ 
+        }
+
+        .mission-split-input-container input[type="number"]::-webkit-outer-spin-button,
+        .mission-split-input-container input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .mission-split-input-container button{
+            display: flex;
+            margin-left: 4%;
+            justify-content: center;
+            background-color: rgb(180, 15, 15);
+            color: white;
+            width: 7%;
+            padding: 0.5%;
+        }

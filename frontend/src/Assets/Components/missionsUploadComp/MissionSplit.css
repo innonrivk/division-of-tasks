@@ -1,0 +1,42 @@
+.mission-split-container{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    
+}
+
+.mission-split-title{
+    grid-column: 1 / 6;
+    grid-row: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mission-split-title p{
+    margin-left: 5%;
+    font-size : large;
+    text-decoration: underline 2px;
+    color: #000;   
+}
+
+.mission-split-title button{
+    background-color: green;
+    border: none;   
+    border-radius: 5px;
+}
+
+.mission-split-input-erea{
+    grid-column: 1 / 6;
+    grid-row: 2 / 6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: #000 2px solid; 
+    overflow:scroll ;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+
+}
