@@ -41,26 +41,6 @@
 
 
 
-.create-mission-btn{
-    grid-column: 7 /  9;
-    grid-row: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition:  0.3s;
-}
-.create-mission-btn button{
-    padding: 10px;
-    width: 60%;
-    height: 50%;
-    background-color: #4CAF50;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-.create-mission-btn button:hover{
-    background-color: #45a049;
-}
 
 
 
