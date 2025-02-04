@@ -1,0 +1,114 @@
+.mission-card-container {
+  display: grid;
+  direction: rtl;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 80%;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  aspect-ratio: 10/1;
+  margin: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mission-card-header {
+  color: #000;
+  grid-column: 2 / span 2;
+  grid-row: 1;
+  display: flex;
+  align-self: center;
+  width: 100%;
+}
+
+.mission-card-header h3 {
+  display: flex;
+  justify-content: center;
+  text-align: right;
+  width: 100%;
+  margin: 0;
+  font-size: clamp(0.8rem, 2vw, 1.5rem); /* Dynamically adjust font size */
+  flex-shrink: 1; /* Allow the text to shrink */
+  min-width: 0; /* Ensure the text can shrink below its content size */
+}
+
+.mission-card-delete-btn {
+  grid-column: 4;
+  grid-row: 1;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.mission-card-delete-btn button {
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  margin-left: 5%;
+  background-color: rgba(231, 12, 12, 0.742);
+  width: 30%;
+  aspect-ratio: 1;
+  border: none;
+  cursor: pointer;
+}
+
+.mission-card-dates {
+  color: #000;
+  display: flex;
+  flex-direction: row;
+  grid-column: 1 / span 4;
+  grid-row: 2;
+  align-items: center;
+  justify-content: center;
+}
+
+.mission-card-dates p {
+  font-size: 0.8rem;
+  margin-right: 1%;
+  margin-left: 1%;
+}
+
+.mission-card-dates span {
+  color: #000;
+  font-size: 1rem;
+  margin: 0 10px;
+}
+
+.mission-card-manpower {
+  grid-row: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: 1 / span 2;
+  color: #000;
+}
+
+.mission-card-fixed-green  {
+  grid-row: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  grid-column: 4;
+  color: #000;
+  width: 80%;
+  height: 80%;
+  background-color: #03cb1d65;
+  border-radius: 5px;
+}
+
+.mission-card-fixed-grey{
+  grid-row: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  grid-column: 4;
+  color: #000;
+  width: 80%;
+  height: 80%;
+  background-color: #98989865;
+  border-radius: 5px;
+}

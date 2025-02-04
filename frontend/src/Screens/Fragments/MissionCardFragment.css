@@ -1,0 +1,17 @@
+.mission-cards-panel-frag{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content:baseline;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #d9d7d7;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.341);
+    overflow: scroll;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+
+}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import DragAndDrop from '../Assets/Components/DragAndDrop';
-import FileUploader from '../Assets/Components/FileUploader';
+import DragAndDrop from '../Assets/Components/excelFileUploadComp/DragAndDrop';
+import FileUploader from '../Assets/Components/excelFileUploadComp/FileUploader';
 import "./NameFileUploadScreen.css";
 
 function NameFileUploadScreen() {

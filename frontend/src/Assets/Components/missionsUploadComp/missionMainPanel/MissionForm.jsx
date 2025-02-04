@@ -48,15 +48,16 @@ function MissionForm(props) {
     useEffect(() => {
         if (!isAllValid) return;
         const json = {
+            id: Date.now(),
             name: missionTitle,
             start_date: missionStartDate,
             end_date: missionEndDate,
             score: missionScore,
             total_manpower: missionTotalManPower,
             percentage: missionSplit,
-            is_permanent: missionIsFixed ? 1 : 0
+            is_permanent: missionIsFixed ? "1" : "0"
         };
-       
+        
         props.sendJson(json)
 
 
@@ -111,7 +112,7 @@ function MissionForm(props) {
                         type='date'
                         value={missionStartDate}
                         onChange={(e) => setMissionStartDate(e.target.value)}
-                        placeholder='yyyy-mm-dd'
+                        placeholder='dd/mm/yyyy'
                     />
                 </div>
                 <div className='mission-form-ending-date-input'>
@@ -120,6 +121,7 @@ function MissionForm(props) {
                         type='date'
                         value={missionEndDate}
                         onChange={(e) => setMissionEndDate(e.target.value)}
+                        placeholder='dd/mm/yyyy'
                     />
                 </div>
             </div>
