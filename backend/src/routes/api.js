@@ -4,6 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const dbMan = require("../utils/dbMan");
 const parseExcel = require("../utils/excelParser");
+const algo = require('../utils/algo')
 
 const upload = multer({
     dest: 'uploads/',
@@ -14,7 +15,7 @@ const upload = multer({
         if(extName) {
             return cb(null, true)
         } else {
-            cb(new Error({message: 'Only Excel filess are allowed', code : 415}))
+            cb({message: 'Only Excel filess are allowed', code : 415})
         }
     }
 })
@@ -47,7 +48,7 @@ router.get('/file', async (req, res) => {
         const users = await dbMan.getUsers()
         res.status(200).json(users)
     } catch (err){
-        res.status(500).send(err)
+        res.status(err.code).send(err.message)
     }
 })
 
@@ -57,6 +58,15 @@ router.get('/missions', async(req, res) => {
         res.status(200).json(missions)
     } catch (err) {
         res.status(500).send(err)
+    }
+})
+
+router.get('/excel', async(req, res) => {
+    try{
+        await algo.main()
+        res.status(200).send("done")
+    } catch (err) {
+        res.status(err.code).send(err.message)
     }
 })
 

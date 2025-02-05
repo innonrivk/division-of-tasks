@@ -10,7 +10,7 @@ class DatabaseManager {
         return new Promise((resolve, reject) => {
             db.serialize(() => {
                 if (!tableName || !this.isValidateTableName(tableName)) {
-                    reject({error : "Invalid file name"})
+                    reject({message : "Invalid file name", code: 500})
                 }
 
                 db.run(`DROP TABLE IF EXISTS ${tableName}`) // instead of updating we are just running over the current data
@@ -24,9 +24,10 @@ class DatabaseManager {
                     job Ntext NOT NULL,
                     phone_number Ntext NOT NULL,
                     unit Ntext NOT NULL,
-                    end_of_service_date NTEXT NOT NULL);`, (err) => {
+                    end_of_service_date NTEXT NOT NULL,
+                    score INTEGER DEFAULT 0);`, (err) => {
                         if(err) {
-                            reject(error)
+                            reject({message: err, code: 500})
                         }
                 })
 
@@ -39,8 +40,9 @@ class DatabaseManager {
                     job,
                     phone_number,
                     unit,
-                    end_of_service_date
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`)
+                    end_of_service_date,
+                    score
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`)
                     
                 users.forEach(user => {
                     stmt.run(
@@ -53,9 +55,10 @@ class DatabaseManager {
                         user["מספר טלפון"],
                         user["יחידה ארגונית"],
                         user["תאריך תום שחרור"],
+                        user["ניקוד"],
                         (error) => {
                             if (error) {
-                                reject(error)
+                                reject({message: error, code: 500})
                             }
                         }
                     )
@@ -63,7 +66,7 @@ class DatabaseManager {
 
                 stmt.finalize((error) => {
                     if (error) {
-                        reject(error)
+                        reject({message: error, code: 500})
                     } else {
                         resolve({message: "User data inserted successfully", code : 201})
                     }
@@ -74,9 +77,10 @@ class DatabaseManager {
 
     static getUsers() {
         return new Promise((resolve, reject) => {
-            db.all(`SELECT * FROM users`, (error, rows) => {
+            db.all(`SELECT * FROM soldiers`, (error, rows) => {
                 if(error){
-                    reject(error)
+                    reject({message: error, code: 500}
+                    )
                 } else {
                     resolve({message: rows, code : 200})
                 }
@@ -95,7 +99,7 @@ class DatabaseManager {
                     start_date NTEXT NOT NULL,
                     end_date NTEXT NOT NULL,
                     score INTEGER NOT NULL,
-                    percentage INTEGER NOT NULL,
+                    percentage NTEXT NOT NULL,
                     is_permanent INTEGER NOT NULL CHECK(is_permanent IN (0, 1)));`, (err) => {
                         if (err) {
                             reject(err)
@@ -117,7 +121,7 @@ class DatabaseManager {
                         mission["start_date"],
                         mission["end_date"],
                         mission["score"],
-                        mission["percentage"],
+                        JSON.stringify(mission["percentage"]),
                         mission["is_permanent"],
                         (err) => {
                             if (err) {
@@ -139,7 +143,6 @@ class DatabaseManager {
     }
 
     static getMissions() {
-        //this function is only for checking the data that was inserted into the db
         return new Promise((resolve, reject) => {
             db.all(`SELECT * FROM currentMissions`, (err, rows) => {
                 if (err) {
