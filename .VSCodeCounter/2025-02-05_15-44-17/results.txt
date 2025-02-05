@@ -1,0 +1,74 @@
+Date : 2025-02-05 15:44:17
+Directory : c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src
+Total : 33 files,  1322 codes, 22 comments, 236 blanks, all 1580 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| CSS            |         14 |        766 |          7 |        108 |        881 |
+| JavaScript JSX |         15 |        514 |          5 |        119 |        638 |
+| JavaScript     |          2 |         40 |         10 |          9 |         59 |
+| XML            |          2 |          2 |          0 |          0 |          2 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                                              | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                                 |         33 |      1,322 |         22 |        236 |      1,580 |
+| . (Files)                                                                                                                                         |          4 |        117 |          0 |         18 |        135 |
+| Assets                                                                                                                                            |         15 |        811 |          2 |        140 |        953 |
+| Assets\Components                                                                                                                                 |         13 |        809 |          2 |        140 |        951 |
+| Assets\Components\excelFileUploadComp                                                                                                             |          4 |        193 |          1 |         29 |        223 |
+| Assets\Components\missionsUploadComp                                                                                                              |          9 |        616 |          1 |        111 |        728 |
+| Assets\Components\missionsUploadComp (Files)                                                                                                      |          2 |        145 |          0 |         16 |        161 |
+| Assets\Components\missionsUploadComp\missionMainPanel                                                                                             |          7 |        471 |          1 |         95 |        567 |
+| Assets\res                                                                                                                                        |          2 |          2 |          0 |          0 |          2 |
+| Route                                                                                                                                             |          1 |         19 |          0 |          4 |         23 |
+| Screens                                                                                                                                           |         12 |        335 |         10 |         66 |        411 |
+| Screens (Files)                                                                                                                                   |          7 |        256 |         10 |         47 |        313 |
+| Screens\Fragments                                                                                                                                 |          5 |         79 |          0 |         19 |         98 |
+| Utils                                                                                                                                             |          1 |         40 |         10 |          8 |         58 |
+| Utils\ExcelParser                                                                                                                                 |          1 |         40 |         10 |          8 |         58 |
++---------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                                                                          | language       | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\App.css                                                                     | CSS            |         37 |          0 |          6 |         43 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\App.jsx                                                                     | JavaScript JSX |         10 |          0 |          2 |         12 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\excelFileUploadComp\DragAndDrop.css                       | CSS            |         51 |          0 |          6 |         57 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\excelFileUploadComp\DragAndDrop.jsx                       | JavaScript JSX |         38 |          0 |          8 |         46 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\excelFileUploadComp\FileUploader.css                      | CSS            |         51 |          0 |          6 |         57 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\excelFileUploadComp\FileUploader.jsx                      | JavaScript JSX |         53 |          1 |          9 |         63 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\missionsUploadComp\MissionCard.css                        | CSS            |        104 |          0 |         10 |        114 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\missionsUploadComp\MissionCard.jsx                        | JavaScript JSX |         41 |          0 |          6 |         47 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\missionsUploadComp\missionMainPanel\MissionForm.css       | CSS            |        167 |          0 |         26 |        193 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\missionsUploadComp\missionMainPanel\MissionForm.jsx       | JavaScript JSX |        126 |          1 |         25 |        152 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\missionsUploadComp\missionMainPanel\MissionSplit.css      | CSS            |         38 |          0 |          6 |         44 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\missionsUploadComp\missionMainPanel\MissionSplit.jsx      | JavaScript JSX |         55 |          0 |         13 |         68 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\missionsUploadComp\missionMainPanel\MissionSplitInput.css | CSS            |         45 |          0 |          5 |         50 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\missionsUploadComp\missionMainPanel\MissionSplitInput.jsx | JavaScript JSX |         20 |          0 |         10 |         30 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\missionsUploadComp\missionMainPanel\MissionToDB.jsx       | JavaScript JSX |         20 |          0 |         10 |         30 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\res\react.svg                                                        | XML            |          1 |          0 |          0 |          1 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\res\vite.svg                                                         | XML            |          1 |          0 |          0 |          1 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Route\MainRouter.jsx                                                        | JavaScript JSX |         19 |          0 |          4 |         23 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\Fragments\MainPanelFrag.css                                         | CSS            |         25 |          0 |          3 |         28 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\Fragments\MainPanelFrag.jsx                                         | JavaScript JSX |         18 |          0 |          9 |         27 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\Fragments\MissionCardFragment.css                                   | CSS            |         16 |          0 |          1 |         17 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\Fragments\MissionCardFragment.jsx                                   | JavaScript JSX |         20 |          0 |          5 |         25 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\Fragments\MissionFormFragment.css                                   | CSS            |          0 |          0 |          1 |          1 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\HomePage.css                                                        | CSS            |         40 |          3 |          4 |         47 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\HomePage.jsx                                                        | JavaScript JSX |         19 |          0 |          4 |         23 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\MainScreen.js                                                       | JavaScript     |          0 |          0 |          1 |          1 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\MissionUploadScreen.css                                             | CSS            |         78 |          2 |         20 |        100 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\MissionUploadScreen.jsx                                             | JavaScript JSX |         38 |          3 |          8 |         49 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\NameFileUploadScreen.css                                            | CSS            |         53 |          2 |          6 |         61 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\NameFileUploadScreen.jsx                                            | JavaScript JSX |         28 |          0 |          4 |         32 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Utils\ExcelParser\ExcelParser.js                                            | JavaScript     |         40 |         10 |          8 |         58 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\index.css                                                                   | CSS            |         61 |          0 |          8 |         69 |
+| c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\main.jsx                                                                    | JavaScript JSX |          9 |          0 |          2 |         11 |
+| Total                                                                                                                                             |                |      1,322 |         22 |        236 |      1,580 |
++---------------------------------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

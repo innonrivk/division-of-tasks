@@ -64,7 +64,7 @@
     justify-content: center;
 }
 
-.send-mission-btn{
+.send-mission-btn-container{
     grid-column: 1 / 4;
     grid-row: 8;
     display: flex;

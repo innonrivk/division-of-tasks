@@ -177,6 +177,7 @@
     transition:  0.3s;
 }
 .mission-form-submit-btn button{
+    outline: none   ;
     font-size: small;
     padding: 10px;
     width: 100%;

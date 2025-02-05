@@ -1,0 +1,35 @@
+"filename", "language", "CSS", "JavaScript JSX", "JavaScript", "XML", "comment", "blank", "total"
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\App.css", "CSS", 37, 0, 0, 0, 0, 6, 43
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\App.jsx", "JavaScript JSX", 0, 10, 0, 0, 0, 2, 12
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\excelFileUploadComp\DragAndDrop.css", "CSS", 51, 0, 0, 0, 0, 6, 57
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\excelFileUploadComp\DragAndDrop.jsx", "JavaScript JSX", 0, 38, 0, 0, 0, 8, 46
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\excelFileUploadComp\FileUploader.css", "CSS", 51, 0, 0, 0, 0, 6, 57
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\excelFileUploadComp\FileUploader.jsx", "JavaScript JSX", 0, 53, 0, 0, 1, 9, 63
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\missionsUploadComp\MissionCard.css", "CSS", 104, 0, 0, 0, 0, 10, 114
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\missionsUploadComp\MissionCard.jsx", "JavaScript JSX", 0, 41, 0, 0, 0, 6, 47
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\missionsUploadComp\missionMainPanel\MissionForm.css", "CSS", 167, 0, 0, 0, 0, 26, 193
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\missionsUploadComp\missionMainPanel\MissionForm.jsx", "JavaScript JSX", 0, 126, 0, 0, 1, 25, 152
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\missionsUploadComp\missionMainPanel\MissionSplit.css", "CSS", 38, 0, 0, 0, 0, 6, 44
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\missionsUploadComp\missionMainPanel\MissionSplit.jsx", "JavaScript JSX", 0, 55, 0, 0, 0, 13, 68
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\missionsUploadComp\missionMainPanel\MissionSplitInput.css", "CSS", 45, 0, 0, 0, 0, 5, 50
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\missionsUploadComp\missionMainPanel\MissionSplitInput.jsx", "JavaScript JSX", 0, 20, 0, 0, 0, 10, 30
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\Components\missionsUploadComp\missionMainPanel\MissionToDB.jsx", "JavaScript JSX", 0, 20, 0, 0, 0, 10, 30
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\res\react.svg", "XML", 0, 0, 0, 1, 0, 0, 1
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Assets\res\vite.svg", "XML", 0, 0, 0, 1, 0, 0, 1
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Route\MainRouter.jsx", "JavaScript JSX", 0, 19, 0, 0, 0, 4, 23
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\Fragments\MainPanelFrag.css", "CSS", 25, 0, 0, 0, 0, 3, 28
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\Fragments\MainPanelFrag.jsx", "JavaScript JSX", 0, 18, 0, 0, 0, 9, 27
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\Fragments\MissionCardFragment.css", "CSS", 16, 0, 0, 0, 0, 1, 17
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\Fragments\MissionCardFragment.jsx", "JavaScript JSX", 0, 20, 0, 0, 0, 5, 25
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\Fragments\MissionFormFragment.css", "CSS", 0, 0, 0, 0, 0, 1, 1
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\HomePage.css", "CSS", 40, 0, 0, 0, 3, 4, 47
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\HomePage.jsx", "JavaScript JSX", 0, 19, 0, 0, 0, 4, 23
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\MainScreen.js", "JavaScript", 0, 0, 0, 0, 0, 1, 1
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\MissionUploadScreen.css", "CSS", 78, 0, 0, 0, 2, 20, 100
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\MissionUploadScreen.jsx", "JavaScript JSX", 0, 38, 0, 0, 3, 8, 49
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\NameFileUploadScreen.css", "CSS", 53, 0, 0, 0, 2, 6, 61
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Screens\NameFileUploadScreen.jsx", "JavaScript JSX", 0, 28, 0, 0, 0, 4, 32
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\Utils\ExcelParser\ExcelParser.js", "JavaScript", 0, 0, 40, 0, 10, 8, 58
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\index.css", "CSS", 61, 0, 0, 0, 0, 8, 69
+"c:\Users\innon\Documents\reactProjects\division-of-tasks\frontend\src\main.jsx", "JavaScript JSX", 0, 9, 0, 0, 0, 2, 11
+"Total", "-", 766, 514, 40, 2, 22, 236, 1580

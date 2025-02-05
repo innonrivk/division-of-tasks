@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import "./MissionUploadScreen.css";
 import MainPanelFrag from './Fragments/MainPanelFrag';
 import MissionCardFragment from './Fragments/MissionCardFragment';
+import SendMissionToDB from '../Assets/Components/missionsUploadComp/SendMissionToDB';
 
 function MissionUploadScreen() {
   const navigate = useNavigate();
@@ -38,8 +39,8 @@ function MissionUploadScreen() {
           <MissionCardFragment missionsJson={missionJson} handleDelete={handleDelete}></MissionCardFragment>
 
         </div>
-        <div className='send-mission-btn'>
-          <button>Send Mission</button>
+        <div className='send-mission-btn-container'>
+          <SendMissionToDB missionsJson={missionJson}></SendMissionToDB>
         </div>
       </div>
     </div>

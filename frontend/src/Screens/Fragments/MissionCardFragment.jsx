@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import MissionCard from '../../Assets/Components/missionsUploadComp/MissionCard';
+import MissionCard from '../../Assets/Components/missionsUploadComp/missionCardPanel/MissionCard';
 import "./MissionCardFragment.css";
 
 function MissionCardFragment(props) {
