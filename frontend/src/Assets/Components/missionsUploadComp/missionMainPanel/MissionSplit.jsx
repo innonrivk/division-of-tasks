@@ -36,7 +36,7 @@ function MissionSplit(props) {
                 for (var i = 0; i < addSplit.length; i++) {
                     var key = Object.keys(addSplit[i])[0]
                     var value = Object.values(addSplit[i])[0]
-                    newSplitArray = [...newSplitArray, { [key]: value }]
+                    newSplitArray.push({ [key]: value })
                 }
                 return newSplitArray;
         })

@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./MissionUploadScreen.css";
 import MainPanelFrag from './Fragments/MainPanelFrag';
 import MissionCardFragment from './Fragments/MissionCardFragment';
 import SendMissionToDB from '../Assets/Components/missionsUploadComp/SendMissionToDB';
+import { use } from 'react';
 
 function MissionUploadScreen() {
   const navigate = useNavigate();
   const [missionJson, setMissionJson] = useState([]);
+  const [reset, setReset] = useState(false)
   const [refresh, setRefresh] = useState(false)
 
   function updateMissionJson(data) {
@@ -22,6 +24,12 @@ function MissionUploadScreen() {
     setMissionJson(prev => newMissions);
     setRefresh(prev => !prev)
   }
+
+  useEffect(() => {
+    if (missionJson.length === 0) return
+    setMissionJson([])
+
+  }, [reset])
 
 
   return (
@@ -40,7 +48,7 @@ function MissionUploadScreen() {
 
         </div>
         <div className='send-mission-btn-container'>
-          <SendMissionToDB missionsJson={missionJson}></SendMissionToDB>
+          <SendMissionToDB missionsJson={missionJson} reset={() => { setReset(prev => !prev) }}></SendMissionToDB>
         </div>
       </div>
     </div>

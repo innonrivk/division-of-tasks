@@ -15,6 +15,18 @@ function MissionForm(props) {
     const [isAllValid, setIsAllValid] = useState(false);
 
 
+    function reset(){
+        setMissionTitle("")
+        setMissionScore("")
+        seMissionTotalManPower("")
+        setMissionStartDate("")
+        setMissionEndDate("")
+        setMissionIsFixed(false)
+        setMissionSplit([])
+        setIsSubmit(false)
+        setIsAllValid(false)
+    }
+
     function validateScore(e) {
         if (e.target.value <= 5 && e.target.value >= 1) {
             setMissionScore(e.target.value);
@@ -24,7 +36,7 @@ function MissionForm(props) {
             setMissionScore('');
         }
 
-    }
+    }   
 
     async function upadteMissionSplit(cbFunc) {
         const result = await cbFunc();
@@ -60,23 +72,27 @@ function MissionForm(props) {
         
         props.sendJson(json)
 
-
-        setMissionTitle("")
-        setMissionScore("")
-        seMissionTotalManPower("")
-        setMissionStartDate("")
-        setMissionEndDate("")
-        setMissionIsFixed(false)
-        setMissionSplit([])
-        setIsSubmit(false)
-        setIsAllValid(false)
+// RESET 
+       reset();
 
     }, [isAllValid])
 
 
 
+    function handleCancel(){
+        reset();
+        props.closeForm()
+        
+    }
+
     return (
         <div className='mission-form-container'>
+            <div className='cancel-btn'>
+                <button onClick={handleCancel}>
+                    ביטול
+                </button>
+
+            </div>
             <div className='mission-form-title-input'>
                 <input
                     type='text'

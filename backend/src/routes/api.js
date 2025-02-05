@@ -34,10 +34,15 @@ router.post('/file', upload.single('file'),async (req, res) => {
     }
 })
 
-router.post('/missions', async(req, res) => {
+router.post('/missions',upload.none() , async(req, res) => {
     try {
-        const ans = await dbMan.createMissionTable(req.body)
-        res.status(ans.code).send(ans.message)
+        const formData = req.body;
+        console.log("formData", formData)
+        const missions = Object.keys(formData).map(key => JSON.parse(formData[key]));
+        console.log("missions", missions)
+        console.log("missions", missions.forEach(mission => console.log(mission.percentage)))
+        // const ans = await dbMan.createMissionTable(req.body)
+         res.status(200).send("done")
     } catch (err){
         res.status(500).send(err)
     }
@@ -54,8 +59,9 @@ router.get('/file', async (req, res) => {
 
 router.get('/missions', async(req, res) => {
     try {
-        const missions = await dbMan.getMissions()
-        res.status(200).json(missions)
+        console.log("get missions", req.body)
+        // const missions = await dbMan.getMissions()
+        res.status(200).json("missions")
     } catch (err) {
         res.status(500).send(err)
     }

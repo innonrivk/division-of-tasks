@@ -19,7 +19,7 @@ function MainPanelFrag(props) {
 
   return (
     <div className='main-panel-frag'>
-      {isNewMission ? <MissionForm sendJson={updateMissionJson}></MissionForm> : <> <button className='create-mission-btn' onClick={() => { setIsNewMission(prev => !prev) }}>Create Mission</button></>}
+      {isNewMission ? <MissionForm closeForm={()=>{  setIsNewMission(false)}} sendJson={updateMissionJson}></MissionForm> : <> <button className='create-mission-btn' onClick={() => { setIsNewMission(prev => !prev) }}>Create Mission</button></>}
     </div>
   );
 }

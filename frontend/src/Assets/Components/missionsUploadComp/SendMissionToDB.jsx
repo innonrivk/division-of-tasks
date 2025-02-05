@@ -1,15 +1,19 @@
 import React ,{ useEffect, useRef, useState} from 'react'
 import './SendMissionToDB.css';
+import axios from 'axios';
 
 
 function SendMissionToDB(props) {
 
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState([]);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [isMessageValid, setIsMessageValid] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
-  const API_URL = "http://localhost:3001/api/file";
+  const API_URL = "http://localhost:3001/api/missions";
 
   useEffect(() => {  
+    if(props.missionsJson.length === 0) return;
+    setIsMessageValid(true)
     setMessage(props.missionsJson);
     console.log("message", message);
   }, [props.missionsJson]);
@@ -20,11 +24,17 @@ function SendMissionToDB(props) {
     setIsUploading(true);
 
     const formData = new FormData();
-    
-    for(var i = 0; i<message.length; i++){
-      formData.append(`${i}`, message[i]);
-    }
+    console.log("message len", message.length);
+   message.forEach((mission, index) => {
+      console.log("mission", mission);
+      formData.append(`${JSON.stringify(index)}`, JSON.stringify(mission));
+    });
 
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ': ' + pair[1]);
+    }
+    
+    console.log("formdata", formData);
     try {
       await axios.post(API_URL, formData, {
         headers: {
@@ -33,7 +43,10 @@ function SendMissionToDB(props) {
         onUploadProgress: (progressEvent) => {
           const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
           setUploadProgress(percentCompleted);
+          console.log("progress", percentCompleted);
         }
+      }).then((res) => {
+        console.log("res", res);
       });
       alert("File uploaded successfully!");
     } catch (error) {
@@ -41,6 +54,7 @@ function SendMissionToDB(props) {
       alert("Failed to upload missions. Please try again.");
     } finally {
       setIsUploading(false);
+      setIsMessageValid(false);
       setUploadProgress(0);
       props.reset();
     }
@@ -50,7 +64,7 @@ function SendMissionToDB(props) {
  
   return (
     <div>
-       <button className='send-mission-btn'  onClick={uploadMessage}>שליחה</button>
+       <button className='send-mission-btn'  onClick={uploadMessage} disabled={isUploading || !isMessageValid}>{isUploading ? "...שולח" : "שליחה"}</button>
     </div>
 )
 }

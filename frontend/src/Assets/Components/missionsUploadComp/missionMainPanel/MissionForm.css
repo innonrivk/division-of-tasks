@@ -9,6 +9,22 @@
     gap: 10px;
 }
 
+.cancel-btn{
+    grid-column: 8;
+    grid-row: 1 ;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+.cancel-btn button{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(196, 52, 66);
+    width: 80%;
+    height: 10%;
+    font-size: small;
+}
+
 .mission-form-title-input {
     display: flex;
     justify-content: center;
