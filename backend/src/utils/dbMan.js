@@ -99,6 +99,7 @@ class DatabaseManager {
                     start_date NTEXT NOT NULL,
                     end_date NTEXT NOT NULL,
                     score INTEGER NOT NULL,
+                    total_manpower INTEGER NOT NULL,
                     percentage NTEXT NOT NULL,
                     is_permanent INTEGER NOT NULL CHECK(is_permanent IN (0, 1)));`, (err) => {
                         if (err) {
@@ -111,9 +112,10 @@ class DatabaseManager {
                     start_date,
                     end_date,
                     score,
+                    total_manpower,
                     percentage,
                     is_permanent
-                    ) VALUES (?, ?, ?, ?, ?, ?);`)
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?);`)
                 
                 missions.forEach(mission => {
                     stmt.run(
@@ -121,6 +123,7 @@ class DatabaseManager {
                         mission["start_date"],
                         mission["end_date"],
                         mission["score"],
+                        mission["total_manpower"],
                         JSON.stringify(mission["percentage"]),
                         mission["is_permanent"],
                         (err) => {

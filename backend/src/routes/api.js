@@ -37,8 +37,8 @@ router.post('/file', upload.single('file'),async (req, res) => {
 router.post('/missions',upload.none() , async(req, res) => {
     try {
         const formData = req.body;
-        const missions = Object.keys(formData).map(key => JSON.parse(formData[key]));
-        const ans = await dbMan.createMissionTable(missions)
+        // const missions = Object.keys(formData).map(key => JSON.parse(formData[key]));        // while testing without the front this line is bugged
+        const ans = await dbMan.createMissionTable(formData)
          res.status(200).send(ans)
     } catch (err){
         res.status(500).send(err)
@@ -68,6 +68,7 @@ router.get('/excel', async(req, res) => {
         await algo.main()
         res.status(200).send("done")
     } catch (err) {
+        console.log(err)
         res.status(err.code).send(err.message)
     }
 })

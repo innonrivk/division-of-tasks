@@ -50,6 +50,9 @@ class utils{
         try{
             for(var i = 0; i < missions.length; i++) {
                 missions[i].percentage = JSON.parse(missions[i]["percentage"])
+                this.checkPerc(missions[i].percentage, missions[i].name)
+                missions[i].percentage = this.getPeople(missions[i].percentage, missions[i].total_manpower)
+                console.log(missions[i].percentage)
             }
             return missions
         } catch (err) {
@@ -57,35 +60,23 @@ class utils{
         }
     }
 
-    static checkPerc(missions) {
-        let sumArr = []
-        for(var i = 0; i < missions.length - 1; i++) {
-            let sum = 0
-            for(var key in missions[i].percentage) {
-                if (key != "חיילים") {
-                    sum += missions[i].percentage[key]
-                }
-            }
-            sumArr.push(sum)
+    static checkPerc(perc, name) {
+        let sum = 0
+        for(var i = 0; i < perc.length; i++) {
+            sum += perc[i][Object.keys(perc[i])[0]]
         }
-
-        for(var i = 0; i < sumArr.length; i++) {
-            if (sumArr[i] != 100) {
-                throw new errCon.InvalidDataInput(`The percentage is not 100% at ${missions[i].name}`, 422)
-            }
+        if (sum != 100) {
+            throw new errCon.InvalidDataInput(`The percentage is not 100% at ${name}`, 422)
         }
     }
 
-    static getPeople(missions) {
+    static getPeople(perc, manpower) {
         try {
-            for(var i = 0; i < missions.length; i++) {
-                for(var key in missions[i].percentage) {
-                    if(key != "חיילים") {
-                        missions[i].percentage[key] = Math.round(missions[i].percentage[key] * missions[i].percentage["חיילים"] / 100)
-                    }
-                }
+            for(var i = 0; i < perc.length; i++) {
+                let key = Object.keys(perc[i])[0]
+                perc[i][key] = Math.round(perc[i][key] * manpower * 0.01)     // json[key] = (perc * manpower) / 100
             }
-            return missions
+            return perc
         } catch (err) {
             throw err
         }
