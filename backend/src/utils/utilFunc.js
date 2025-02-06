@@ -1,3 +1,5 @@
+const errCon = require('./errorTypes')
+
 const fs = require('fs');
 
 class utils{
@@ -17,29 +19,29 @@ class utils{
         switch(header) {
             case "מספר אישי":
                 if (!id.test(value)) {
-                    throw {message: `bad id number ${value}, at row ${rowIndex} and column ${header}`, code: 422}
+                    throw new errCon.InvalidDataInput(`bad id number ${value}, at row ${rowIndex} and column ${header}`, 422)
                 }
                 break
             case "מספר טלפון":
                 if (!phone_number.test(value)) {
-                    throw {message: `bad phone number ${value}, at row ${rowIndex} and column ${header}`, code: 422}
+                    throw new errCon.InvalidDataInput(`bad phone number ${value}, at row ${rowIndex} and column ${header}`,422)
                 }
                 break
             case "תאריך תום שירות":
                 if (!freedom.test(value)) {
-                    throw {message: `bad date ${value}, at row ${rowIndex} and column ${header}`, code: 422}
+                    throw new errCon.InvalidDataInput(`bad date ${value}, at row ${rowIndex} and column ${header}`, 422)
                 }
                 break
             case "דרגה":
             case "סוג שירות":
             case "עיסוק":
                 if (!choice.includes(value)) {
-                    throw {message: `bad input ${value}, at row ${rowIndex} and column ${header}`, code: 422}
+                    throw new errCon.InvalidDataInput(`bad input ${value}, at row ${rowIndex} and column ${header}`, 422)
                 }
                 break
             default:
                 if (forbidden.test(value)) {
-                    throw {message: `forbidden char at ${value}, at row ${rowIndex} and column ${header}`, code: 422}
+                    throw new errCon.InvalidDataInput(`forbidden char at ${value}, at row ${rowIndex} and column ${header}`, 422)
                 }
         }
     }
@@ -69,7 +71,7 @@ class utils{
 
         for(var i = 0; i < sumArr.length; i++) {
             if (sumArr[i] != 100) {
-                throw {message: `The percentage is not 100% at ${missions[i].name}`, code: 422}
+                throw new errCon.InvalidDataInput(`The percentage is not 100% at ${missions[i].name}`, 422)
             }
         }
     }

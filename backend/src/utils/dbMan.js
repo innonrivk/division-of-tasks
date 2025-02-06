@@ -1,4 +1,5 @@
 const db = require("../db/connection")
+const errCon = require("./errorTypes")
 
 class DatabaseManager {
     static isValidateTableName(tableName) {
@@ -10,7 +11,7 @@ class DatabaseManager {
         return new Promise((resolve, reject) => {
             db.serialize(() => {
                 if (!tableName || !this.isValidateTableName(tableName)) {
-                    reject({message : "Invalid file name", code: 500})
+                    reject(new errCon.InvalidDataInput("Invalid file name", 500))
                 }
 
                 db.run(`DROP TABLE IF EXISTS ${tableName}`) // instead of updating we are just running over the current data
@@ -25,9 +26,9 @@ class DatabaseManager {
                     phone_number Ntext NOT NULL,
                     unit Ntext NOT NULL,
                     end_of_service_date NTEXT NOT NULL,
-                    score INTEGER DEFAULT 0);`, (err) => {
-                        if(err) {
-                            reject({message: err, code: 500})
+                    score INTEGER DEFAULT 0);`, (error) => {
+                        if(error) {
+                            reject(new errCon.DatabaseError(error, 500))
                         }
                 })
 
@@ -58,7 +59,7 @@ class DatabaseManager {
                         user["ניקוד"],
                         (error) => {
                             if (error) {
-                                reject({message: error, code: 500})
+                                reject(new errCon.DatabaseError(error, 500))
                             }
                         }
                     )
@@ -66,7 +67,7 @@ class DatabaseManager {
 
                 stmt.finalize((error) => {
                     if (error) {
-                        reject({message: error, code: 500})
+                        reject(new errCon.DatabaseError(error, 500))
                     } else {
                         resolve({message: "User data inserted successfully", code : 201})
                     }
@@ -77,10 +78,9 @@ class DatabaseManager {
 
     static getUsers() {
         return new Promise((resolve, reject) => {
-            db.all(`SELECT * FROM soldiers`, (error, rows) => {
+            db.all(`SELECT * FROM soliders`, (error, rows) => {
                 if(error){
-                    reject({message: error, code: 500}
-                    )
+                    reject(new errCon.InvalidDataInput(error, 500))
                 } else {
                     resolve({message: rows, code : 200})
                 }

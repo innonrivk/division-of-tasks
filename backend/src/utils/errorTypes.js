@@ -1,6 +1,3 @@
-/*
-------- example -------
-
 class DatabaseError extends Error {
     constructor(message, code) {
         super(message)
@@ -8,6 +5,17 @@ class DatabaseError extends Error {
         this.name = "DatabaseError"
     }
 }
-*/
 
-module.exports = {}
+
+class InvalidDataInput extends Error {
+    constructor(message, code) {
+        super(message)
+        this.code = code
+        this.name = "InvalidDataInput"
+    }
+}
+
+module.exports = {
+    InvalidDataInput,
+    DatabaseError
+}
