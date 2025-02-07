@@ -47,7 +47,7 @@ router.post('/missions',upload.none() , async(req, res) => {
 
 router.get('/file', async (req, res) => {
     try{
-        const users = await dbMan.getUsers()
+        const users = await dbMan.getSoliders()
         res.status(200).json(users)
     } catch (err){
         res.status(err.code).send(err.message)
@@ -65,11 +65,11 @@ router.get('/missions', async(req, res) => {
 
 router.get('/excel', async(req, res) => {
     try{
-        await algo.main()
-        res.status(200).send("done")
+        let solidersForMission = await algo.main()
+        res.status(200).send(solidersForMission)
     } catch (err) {
         console.log(err)
-        res.status(err.code).send(err.message)
+        res.status(500).send(err)
     }
 })
 

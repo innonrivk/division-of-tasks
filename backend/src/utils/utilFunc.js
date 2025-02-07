@@ -1,5 +1,4 @@
 const errCon = require('./errorTypes')
-
 const fs = require('fs');
 
 class utils{
@@ -13,7 +12,7 @@ class utils{
         const id = /[1-9][0-9]{6}/
         const phone_number = /^05[0-9]-[0-9]{7}$/
         const freedom = /\b(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}\b/
-        const choice = [`רב"ט`, 'סמל', `סמ"ר`, 'נגד', 'קצין', 'חובה', 'קבע', 'מדריך',  `משק תש/שלישות`]
+        const choice = [`רב"ט`, 'סמל', `סמ"ר`, 'נגד', 'קצין', 'חובה', 'קבע', 'מדריך',  `משק תש/שלישות`, `אפסנאי`]
         const forbidden = /[!#$%&'*,.;<=>?@[\]^_\`{|}~]/
 
         switch(header) {
@@ -52,7 +51,6 @@ class utils{
                 missions[i].percentage = JSON.parse(missions[i]["percentage"])
                 this.checkPerc(missions[i].percentage, missions[i].name)
                 missions[i].percentage = this.getPeople(missions[i].percentage, missions[i].total_manpower)
-                console.log(missions[i].percentage)
             }
             return missions
         } catch (err) {

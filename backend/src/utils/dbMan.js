@@ -10,13 +10,15 @@ class DatabaseManager {
     static createTable(users, tableName) {
         return new Promise((resolve, reject) => {
             db.serialize(() => {
-                if (!tableName || !this.isValidateTableName(tableName)) {
-                    reject(new errCon.InvalidDataInput("Invalid file name", 500))
-                }
+                //if (!tableName || !this.isValidateTableName(tableName)) {
+                //    reject(new errCon.InvalidDataInput("Invalid file name", 500))
+                //}
 
-                db.run(`DROP TABLE IF EXISTS ${tableName}`) // instead of updating we are just running over the current data
+                //db.run(`DROP TABLE IF EXISTS ${tableName}`) // instead of updating we are just running over the current data
 
-                db.run(`CREATE TABLE IF NOT EXISTS ${tableName} (
+                db.run('DROP TABLE IF EXISTS soliders')
+
+                db.run(`CREATE TABLE IF NOT EXISTS soliders (
                     frame Ntext NOT NULL,
                     id INTEGER NOT NULL PRIMARY KEY,
                     full_name Ntext NOT NULL,
@@ -26,13 +28,14 @@ class DatabaseManager {
                     phone_number Ntext NOT NULL,
                     unit Ntext NOT NULL,
                     end_of_service_date NTEXT NOT NULL,
-                    score INTEGER DEFAULT 0);`, (error) => {
+                    score INTEGER DEFAULT 0,
+                    is_in_mission INTEGER DEFAULT 0);`, (error) => {
                         if(error) {
                             reject(new errCon.DatabaseError(error, 500))
                         }
                 })
 
-                const stmt = db.prepare(`INSERT INTO ${tableName} (
+                const stmt = db.prepare(`INSERT INTO soliders (
                     frame,
                     id,
                     full_name,
@@ -76,15 +79,71 @@ class DatabaseManager {
         })
     }
 
-    static getUsers() {
+    static updateSolidersScore(newScore, id) {
+        return new Promise((resolve, reject) => {
+            db.all(`UPDATE soliders
+                    SET score=${newScore}, is_in_mission=1
+                    WHERE id=${id};`, (error) => {
+                if(error) {
+                    reject(new errCon.DatabaseError(error, 500))
+                } else {
+                    resolve({message: "solider score updated", code: 201})
+                }
+            })
+        })
+    }
+
+    static getSoliderScoreById(id) {
+        return new Promise((resolve, reject) => {
+            db.all(`SELECT score
+                    FROM soliders
+                    WHERE id=${id}`, (error, score) => {
+                        if(error){
+                            reject(new errCon.DatabaseError(error, 500))
+                        } else {
+                            resolve(score)
+                        }
+                    })
+        })
+    }
+
+    static getSoliders() {
         return new Promise((resolve, reject) => {
             db.all(`SELECT * FROM soliders`, (error, rows) => {
                 if(error){
-                    reject(new errCon.InvalidDataInput(error, 500))
+                    reject(new errCon.DatabaseError(error, 500))
                 } else {
                     resolve({message: rows, code : 200})
                 }
             })
+        })
+    }
+
+    static getSolidersByFrame(frame, manpower) {
+        return new Promise((resolve, reject) => {
+            db.all(`SELECT id
+                    FROM soliders 
+                    WHERE frame='${frame}' AND is_in_mission=0 
+                    ORDER BY score ASC, end_of_service_date ASC
+                    LIMIT ${manpower};`, (error, rows) => {
+                if(error) {
+                    reject(new errCon.DatabaseError(error, 500))
+                } else {
+                    resolve(rows)
+                }
+            })
+        })
+    }
+
+    static ZeroIsInMission() {
+        return new Promise((resolve, reject) => {
+            db.all(`UPDATE soliders
+                SET is_in_mission=0
+                WHERE is_in_mission=1;`, (error) => {
+                    if(error) {
+                        reject(new errCon.DatabaseError(error, 500))
+                    }
+                })
         })
     }
 
