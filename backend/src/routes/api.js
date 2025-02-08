@@ -37,8 +37,8 @@ router.post('/file', upload.single('file'),async (req, res) => {
 router.post('/missions',upload.none() , async(req, res) => {
     try {
         const formData = req.body;
-        // const missions = Object.keys(formData).map(key => JSON.parse(formData[key]));        // while testing without the front this line is bugged
-        const ans = await dbMan.createMissionTable(formData)
+        const missions = Object.keys(formData).map(key => JSON.parse(formData[key]));        // while testing without the front this line is bugged
+        const ans = await dbMan.createMissionTable(missions)
          res.status(200).send(ans)
     } catch (err){
         res.status(500).send(err)
@@ -66,7 +66,11 @@ router.get('/missions', async(req, res) => {
 router.get('/excel', async(req, res) => {
     try{
         await gen()
-        res.status(200).send("done")
+        console.log("done")
+        const excelFilePath = path.join(__dirname, '../../uploads/sample.xlsx')
+        res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        res.setHeader("Content-Disposition", "attachment; filename=sample.xlsx");
+        res.status(200).sendFile(excelFilePath)
     } catch (err) {
         console.log(err)
         res.status(500).send(err)

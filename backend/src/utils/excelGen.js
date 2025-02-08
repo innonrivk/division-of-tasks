@@ -1,6 +1,5 @@
 const xl = require('exceljs')
 const algo = require("./algo")
-const fs = require("fs")
 
 async function excelGenerator() {
     try{
@@ -37,7 +36,7 @@ async function excelGenerator() {
             worksheet.addRow(data)
         }
 
-        await workbook.xlsx.writeFile('sample.xlsx')
+        await workbook.xlsx.writeFile('./uploads/sample.xlsx')
     } catch(e) {
         throw e
     }

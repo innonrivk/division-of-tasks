@@ -61,7 +61,7 @@ class utils{
     static checkPerc(perc, name) {
         let sum = 0
         for(var i = 0; i < perc.length; i++) {
-            sum += perc[i][Object.keys(perc[i])[0]]
+            sum += parseInt(perc[i][Object.keys(perc[i])[0]])
         }
         if (sum != 100) {
             throw new errCon.InvalidDataInput(`The percentage is not 100% at ${name}`, 422)
@@ -72,7 +72,7 @@ class utils{
         try {
             for(var i = 0; i < perc.length; i++) {
                 let key = Object.keys(perc[i])[0]
-                perc[i][key] = Math.round(perc[i][key] * manpower * 0.01)     // json[key] = (perc * manpower) / 100
+                perc[i][key] = Math.round(parseInt(perc[i][key]) * manpower * 0.01)     // json[key] = (perc * manpower) / 100
             }
             return perc
         } catch (err) {
