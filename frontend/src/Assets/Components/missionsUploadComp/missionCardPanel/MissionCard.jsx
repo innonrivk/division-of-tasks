@@ -2,29 +2,13 @@ import React, { useEffect, useRef } from 'react';
 import './MissionCard.css';
 
 function MissionCard(props) {
-  const headerRef = useRef(null);
-
-  useEffect(() => {
-    const header = headerRef.current;
-    const resizeObserver = new ResizeObserver(() => {
-      if (header.scrollWidth > header.clientWidth) {
-        header.style.fontSize = '0.8rem';
-      } else {
-        header.style.fontSize = '1.5rem';
-      }
-    });
-
-    resizeObserver.observe(header);
-
-    return () => {
-      resizeObserver.unobserve(header);
-    };
-  }, []);
+ 
+  
 
   return (
     <div className='mission-card-container'>
       <div className='mission-card-header'>
-        <h3 ref={headerRef}>{props.mission.name}</h3>
+        <h3 >{props.mission.name}</h3>
       </div>
       <div className='mission-card-delete-btn'>
         <button onClick={props.onDelete}>X</button>

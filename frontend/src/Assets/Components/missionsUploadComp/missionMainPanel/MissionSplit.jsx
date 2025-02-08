@@ -30,12 +30,12 @@ function MissionSplit(props) {
     useEffect(() => {
         console.log('isSubmit:', props.isSubmit);
         if (props.isSubmit) {
-
             props.setMissionSplit( () =>  {
                 var newSplitArray = [];
                 for (var i = 0; i < addSplit.length; i++) {
-                    var key = Object.keys(addSplit[i])[0]
-                    var value = Object.values(addSplit[i])[0]
+                    var key = Object.keys(addSplit[i]).filter(key => key !== 'id')[0];
+                    var value =  addSplit[i][key];
+                    console.log('key:', key, 'value:', value);
                     newSplitArray.push({ [key]: value })
                 }
                 return newSplitArray;

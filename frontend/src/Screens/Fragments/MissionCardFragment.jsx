@@ -12,11 +12,10 @@ function MissionCardFragment(props) {
     }
   }, [props.missionsJson]);
 
- 
   return (
     <div className='mission-cards-panel-frag'>
       {missions.map((mission, index) => (
-        <MissionCard key={mission.id} index={index} mission={mission} onDelete={()=> {props.handleDelete(index)}} />
+        <MissionCard key={mission.id} index={index} mission={mission} onDelete={() => { props.handleDelete(index) }} />
       ))}
     </div>
   );

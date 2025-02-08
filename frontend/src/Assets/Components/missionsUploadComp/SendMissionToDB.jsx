@@ -18,6 +18,8 @@ function SendMissionToDB(props) {
     console.log("message", message);
   }, [props.missionsJson]);
 
+
+  // send the message to the server function
   const uploadMessage = async () => {
     if (!message) return;
 

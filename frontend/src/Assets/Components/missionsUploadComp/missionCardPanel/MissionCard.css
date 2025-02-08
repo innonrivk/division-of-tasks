@@ -1,6 +1,7 @@
 .mission-card-container {
   display: grid;
   direction: rtl;
+  
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
   width: 80%;
@@ -17,20 +18,22 @@
   grid-column: 2 / span 2;
   grid-row: 1;
   display: flex;
-  align-self: center;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally if needed */
   width: 100%;
 }
 
 .mission-card-header h3 {
-  display: flex;
-  justify-content: center;
-  text-align: right;
-  width: 100%;
   margin: 0;
   font-size: clamp(0.8rem, 2vw, 1.5rem); /* Dynamically adjust font size */
-  flex-shrink: 1; /* Allow the text to shrink */
-  min-width: 0; /* Ensure the text can shrink below its content size */
+  flex-shrink: 1;
+  min-width: 0; /* Allow the h3 to shrink */
+  white-space: nowrap;    /* Prevent wrapping */
+  overflow: hidden;       /* Hide overflow */
+  text-overflow: ellipsis;/* Show ellipsis when text is too long */
+  width: 100%;            /* Ensure it uses the available width */
 }
+
 
 .mission-card-delete-btn {
   grid-column: 4;
@@ -83,7 +86,7 @@
   color: #000;
 }
 
-.mission-card-fixed-green  {
+.mission-card-fixed-green {
   grid-row: 3;
   display: flex;
   justify-content: center;
@@ -98,7 +101,7 @@
   border-radius: 5px;
 }
 
-.mission-card-fixed-grey{
+.mission-card-fixed-grey {
   grid-row: 3;
   display: flex;
   justify-content: center;
