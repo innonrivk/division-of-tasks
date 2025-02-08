@@ -4,7 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const dbMan = require("../utils/dbMan");
 const parseExcel = require("../utils/excelParser");
-const algo = require('../utils/algo')
+const gen = require("../utils/excelGen")
 
 const upload = multer({
     dest: 'uploads/',
@@ -65,8 +65,8 @@ router.get('/missions', async(req, res) => {
 
 router.get('/excel', async(req, res) => {
     try{
-        let solidersForMission = await algo.main()
-        res.status(200).send(solidersForMission)
+        await gen()
+        res.status(200).send("done")
     } catch (err) {
         console.log(err)
         res.status(500).send(err)
