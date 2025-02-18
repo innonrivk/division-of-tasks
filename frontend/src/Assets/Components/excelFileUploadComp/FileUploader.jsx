@@ -1,8 +1,8 @@
 // FileUploader.jsx
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import axios, { formToJSON } from 'axios';
 import "./FileUploader.css";
-
+import HttpClient from '../../../Utils/HttpClient'
 const FileUploader = (props) => {
   const [file, setFile] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -21,20 +21,17 @@ const FileUploader = (props) => {
 
     const formData = new FormData();
     formData.append("file", file);
-
+    console.log(formToJSON(formData))
     try {
-      await axios.post(API_URL, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        }, 
-        onUploadProgress: (progressEvent) => {
-          const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-          setUploadProgress(percentCompleted);
-        }
-      });
+      
+      let [validation, response] = await HttpClient.postDataForm(formData)
+      console.log(response)
+
+      if (validation != "done") throw new Error(response);
+      
       alert("File uploaded successfully!");
+   
     } catch (error) {
-      console.error("Error uploading file:", error);
       alert("Failed to upload file. Please try again.");
     } finally {
       setIsUploading(false);

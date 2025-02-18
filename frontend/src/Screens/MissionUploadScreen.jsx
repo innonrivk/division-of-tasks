@@ -4,6 +4,7 @@ import "./MissionUploadScreen.css";
 import MainPanelFrag from './Fragments/MainPanelFrag';
 import MissionCardFragment from './Fragments/MissionCardFragment';
 import SendMissionToDB from '../Assets/Components/missionsUploadComp/SendMissionToDB';
+import DownloadExcelBtn from '../Assets/Components/missionsUploadComp/downloadExcelBtn';
 import { use } from 'react';
 import axios from 'axios';
 
@@ -53,6 +54,9 @@ function MissionUploadScreen() {
         </div>
         <div className='send-mission-btn-container'>
           <SendMissionToDB missionsJson={missionJson} reset={() => { setReset(prev => !prev) }}></SendMissionToDB>
+        </div>
+        <div className='dowmload-excel-btn'>
+          <DownloadExcelBtn isMissionsSent={reset} ></DownloadExcelBtn>
         </div>
       </div>
     </div>
