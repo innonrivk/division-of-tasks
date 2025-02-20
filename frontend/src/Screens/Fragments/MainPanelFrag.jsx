@@ -14,7 +14,9 @@ function MainPanelFrag(props) {
 
   }
   
+useEffect(()=>{
 
+}, [props.editChosenCard])
 
 
   return (

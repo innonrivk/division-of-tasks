@@ -4,6 +4,7 @@ class BackendCommunication {
    
         static MISSIONS_API_URL = "http://localhost:3001/api/missions";
         static FILES_API_URL = "http://localhost:3001/api/file";
+        static FILES_UPDATED_API_URL = "http://localhost:3001/api/file"; // change route 
         static EXCEL_API_URL = "http://localhost:3001/api/excel"
 
     static async postDataForm( formData  , cbFuncLoader = null) {
@@ -11,7 +12,7 @@ class BackendCommunication {
 
       // check which api should be used
       if (Object.keys(formToJSON(formData))[0] == "file"){
-        apiUrl = this.FILES_API_URL;
+        apiUrl = this.FILES_UPDATED_API_URL;
       }
       else{
         apiUrl =  this.MISSIONS_API_URL;

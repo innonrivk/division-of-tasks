@@ -13,6 +13,8 @@ function MissionUploadScreen() {
   const [missionJson, setMissionJson] = useState([]);
   const [reset, setReset] = useState(false)
   const [refresh, setRefresh] = useState(false)
+  const [editChosenCard, setEditChosenCard] = useState("")
+  
 
 
  
@@ -45,7 +47,7 @@ function MissionUploadScreen() {
             <button>Create Mission</button>
         </div> */}
         <div className='main-erea-fragment'>
-          <MainPanelFrag setMissionJson={updateMissionJson}></MainPanelFrag>
+          <MainPanelFrag editChosenCard={editChosenCard} missionsJson={missionJson} setMissionJson={updateMissionJson}></MainPanelFrag>
         </div>
 
         <div className='mission-cards-list-fragment'>
