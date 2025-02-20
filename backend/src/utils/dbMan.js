@@ -121,7 +121,7 @@ class DatabaseManager {
 
     static getSolidersByFrame(frame, manpower) {
         return new Promise((resolve, reject) => {
-            db.all(`SELECT id
+            db.all(`SELECT id, full_name
                     FROM soliders 
                     WHERE frame='${frame}' AND is_in_mission=0 
                     ORDER BY score ASC, end_of_service_date ASC
@@ -132,6 +132,33 @@ class DatabaseManager {
                     resolve(rows)
                 }
             })
+        })
+    }
+
+    static getNumberOfSolidersInFrame(frame) {
+        return new Promise((resolve, reject) => {
+            db.all(`SELECT COUNT(*)
+                    FROM soliders
+                    WHERE frame='${frame}';`, (error, num) => {
+                        if (error) {
+                            reject(new errCon.DatabaseError(error, 500))
+                        } else {
+                            resolve(num)
+                        }
+                    })
+        })
+    }
+
+    static getTotalNumberOfSoliders() {
+        return new Promise((resolve, reject) => {
+            db.all(`SELECT COUNT(*)
+                    FROM soliders;`, (error, num) => {
+                        if (error) {
+                            reject(new errCon.DatabaseError(error, 500))
+                        } else {
+                            resolve(num)
+                        }
+                    })
         })
     }
 
