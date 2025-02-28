@@ -45,6 +45,15 @@ router.post('/missions',upload.none() , async(req, res) => {
     }
 })
 
+router.post('/excel', async(req, res) => {
+    try{
+        let file = req.body
+        console.log(file)
+    } catch(error) {
+        res.status(500).send(error)
+    }
+})
+
 router.get('/file', async (req, res) => {
     try{
         const users = await dbMan.getSoliders()

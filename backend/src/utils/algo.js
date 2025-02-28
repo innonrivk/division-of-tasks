@@ -49,6 +49,10 @@ class algo{
             throw e
         }
     }
+
+    static async updateCurrentAlgoResults(file) {
+
+    }
 }
 
 module.exports = algo
