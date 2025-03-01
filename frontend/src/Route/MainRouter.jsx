@@ -11,8 +11,9 @@ function MainRouter() {
       <Router>
         <Routes>
           <Route path="/" element={<HomePage/>} />
-          <Route path="/files" element={<NameFileUploadScreen/>} />
+          <Route path="/files" element={<NameFileUploadScreen isUpdateFile={false}/>} />
           <Route path="/mission" element={<MissionUploadScreen/>} />
+          <Route path="/updated-files" element={<NameFileUploadScreen isUpdateFile={true}/>} />
         </Routes>
       </Router>
     </div>

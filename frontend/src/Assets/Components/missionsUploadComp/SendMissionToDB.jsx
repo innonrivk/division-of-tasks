@@ -1,7 +1,7 @@
-import React ,{ useEffect, useRef, useState} from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './SendMissionToDB.css';
 import axios from 'axios';
-
+import HttpClient from '../../../Utils/HttpClient'
 
 function SendMissionToDB(props) {
 
@@ -11,8 +11,8 @@ function SendMissionToDB(props) {
   const [isUploading, setIsUploading] = useState(false);
   const API_URL = "http://localhost:3001/api/missions";
 
-  useEffect(() => {  
-    if(props.missionsJson.length === 0) return;
+  useEffect(() => {
+    if (props.missionsJson.length === 0) return;
     setIsMessageValid(true)
     setMessage(props.missionsJson);
     console.log("message", message);
@@ -27,29 +27,18 @@ function SendMissionToDB(props) {
 
     const formData = new FormData();
     console.log("message len", message.length);
-   message.forEach((mission, index) => {
+    message.forEach((mission, index) => {
       console.log("mission", mission);
       formData.append(`${JSON.stringify(index)}`, JSON.stringify(mission));
     });
 
-    for (let pair of formData.entries()) {
-      console.log(pair[0] + ': ' + pair[1]);
-    }
-    
-    console.log("formdata", formData);
+
     try {
-      await axios.post(API_URL, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        }, 
-        onUploadProgress: (progressEvent) => {
-          const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-          setUploadProgress(percentCompleted);
-          console.log("progress", percentCompleted);
-        }
-      }).then((res) => {
-        console.log("res", res);
-      });
+      let [validation, response] = await HttpClient.postDataForm(formData)
+      console.log(validation ,response)
+      
+      if (validation != "done") throw new Error(response);
+
       alert("File uploaded successfully!");
     } catch (error) {
       console.error("Error uploading file:", error);
@@ -61,14 +50,14 @@ function SendMissionToDB(props) {
       props.reset();
     }
   };
-    
 
- 
+
+
   return (
     <div>
-       <button className='send-mission-btn'  onClick={uploadMessage} disabled={isUploading || !isMessageValid}>{isUploading ? "...שולח" : "שליחה"}</button>
+      <button className='send-mission-btn' onClick={uploadMessage} disabled={isUploading || !isMessageValid}>{isUploading ? "...שולח" : "שליחה"}</button>
     </div>
-)
+  )
 }
 
 export default SendMissionToDB

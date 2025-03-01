@@ -4,6 +4,7 @@ import "./MissionUploadScreen.css";
 import MainPanelFrag from './Fragments/MainPanelFrag';
 import MissionCardFragment from './Fragments/MissionCardFragment';
 import SendMissionToDB from '../Assets/Components/missionsUploadComp/SendMissionToDB';
+import DownloadExcelBtn from '../Assets/Components/missionsUploadComp/downloadExcelBtn';
 import { use } from 'react';
 import axios from 'axios';
 
@@ -12,6 +13,8 @@ function MissionUploadScreen() {
   const [missionJson, setMissionJson] = useState([]);
   const [reset, setReset] = useState(false)
   const [refresh, setRefresh] = useState(false)
+  const [editChosenCard, setEditChosenCard] = useState("")
+  
 
 
  
@@ -40,11 +43,9 @@ function MissionUploadScreen() {
     <div className="container-mission-upload">
       <button className="go-back-btn" onClick={() => navigate(-1)}> חזור</button>
       <div className='mission-panel-container'>
-        {/* <div className='create-mission-btn'>
-            <button>Create Mission</button>
-        </div> */}
+   
         <div className='main-erea-fragment'>
-          <MainPanelFrag setMissionJson={updateMissionJson}></MainPanelFrag>
+          <MainPanelFrag editChosenCard={editChosenCard} missionsJson={missionJson} setMissionJson={updateMissionJson}></MainPanelFrag>
         </div>
 
         <div className='mission-cards-list-fragment'>
@@ -53,6 +54,9 @@ function MissionUploadScreen() {
         </div>
         <div className='send-mission-btn-container'>
           <SendMissionToDB missionsJson={missionJson} reset={() => { setReset(prev => !prev) }}></SendMissionToDB>
+        </div>
+        <div className='dowmload-excel-btn'>
+          <DownloadExcelBtn isMissionsSent={reset} ></DownloadExcelBtn>
         </div>
       </div>
     </div>
