@@ -6,6 +6,7 @@ const dbMan = require("../utils/dbMan");
 const parseExcel = require("../utils/excelParser");
 const gen = require("../utils/excelGen")
 const algo = require("../utils/algo")
+const utils = require("../utils/utilFunc")
 
 const upload = multer({
     dest: 'uploads/',
@@ -46,10 +47,15 @@ router.post('/missions',upload.none() , async(req, res) => {
     }
 })
 
-router.post('/excel', async(req, res) => {
+router.post('/excel', upload.any(), async(req, res) => {
     try{
-        let file = req.body
-        console.log(file)
+        if(!req.files) {
+            return res.status(400).send('No file uploaded')
+        }
+
+        const newExcel = req.files[0]
+        utils.unlinkFile(newExcel.path)
+        res.status(200).send("Hello world")
     } catch(error) {
         res.status(500).send(error)
     }

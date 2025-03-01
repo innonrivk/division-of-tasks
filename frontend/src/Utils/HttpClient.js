@@ -13,7 +13,7 @@ class BackendCommunication {
       console.log(jsonDataType)
       // check which api should be used
       if (jsonDataType == "file"){
-        apiUrl = this.FILES_UPDATED_API_URL;
+        apiUrl = this.FILES_API_URL;
       }
       else if (jsonDataType == "updated") {
         console.log("fff" , jsonDataType)

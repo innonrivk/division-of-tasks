@@ -123,3 +123,5 @@ pnpm-lock.yaml
 # ---------------------------
 # Add any additional patterns below
 
+*.db
+*.xlsx
