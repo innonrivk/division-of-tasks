@@ -4,7 +4,7 @@ import DragAndDrop from '../Assets/Components/excelFileUploadComp/DragAndDrop';
 import FileUploader from '../Assets/Components/excelFileUploadComp/FileUploader';
 import "./NameFileUploadScreen.css";
 
-function NameFileUploadScreen() {
+function NameFileUploadScreen(props) {
   const [reset, setReset] = useState(false);
   const [file, setFile] = useState();
   const navigate = useNavigate();
@@ -16,6 +16,9 @@ function NameFileUploadScreen() {
 
   return (
     <div className='container'>
+      <div> 
+          {props.isUpdateFile ? <p>העלאת קובץ אקסל מעודכן</p> : <p>העלאת קובץ שמות</p>}
+      </div>
       <button className="go-back-button" onClick={() => navigate(-1)}>
         חזור
       </button>
@@ -23,7 +26,7 @@ function NameFileUploadScreen() {
         <DragAndDrop setFile={setFile} reset={reset}></DragAndDrop>
       </div>
       <div className="container-component-upload-btn">
-        <FileUploader reset={resetHandler} file={file}></FileUploader>
+        <FileUploader reset={resetHandler} isUpdateFile={props.isUpdateFile} file={file}></FileUploader>
       </div>
     </div>
   );

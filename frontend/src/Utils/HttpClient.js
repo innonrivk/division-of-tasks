@@ -4,18 +4,21 @@ class BackendCommunication {
    
         static MISSIONS_API_URL = "http://localhost:3001/api/missions";
         static FILES_API_URL = "http://localhost:3001/api/file";
-        static FILES_UPDATED_API_URL = "http://localhost:3001/api/file"; // change route 
         static EXCEL_API_URL = "http://localhost:3001/api/excel"
 
     static async postDataForm( formData  , cbFuncLoader = null) {
       var response, apiUrl;
-
+      var jsonDataType = Object.keys(formToJSON(formData))[0] 
+      
       // check which api should be used
-      if (Object.keys(formToJSON(formData))[0] == "file"){
+      if (jsonDataType == "file"){
         apiUrl = this.FILES_UPDATED_API_URL;
       }
+      else if (jsonDataType == "updated-file") {
+        apiUrl = this.EXCEL_API_URL;
+      }
       else{
-        apiUrl =  this.MISSIONS_API_URL;
+          apiUrl =  this.MISSIONS_API_URL;
       }
 
       try {

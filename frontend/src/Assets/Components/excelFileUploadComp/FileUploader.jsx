@@ -7,7 +7,6 @@ const FileUploader = (props) => {
   const [file, setFile] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [isUploading, setIsUploading] = useState(false);
-  const API_URL = "http://localhost:3001/api/file";
 
   useEffect(() => {  
     setFile(props.file);
@@ -20,7 +19,14 @@ const FileUploader = (props) => {
     setIsUploading(true);
 
     const formData = new FormData();
-    formData.append("file", file);
+    //  diffrentiating between uplaod updated file and uploading new names file  
+    if(props.isUpdateFile){
+      formData.append("updated-file", file);
+    }
+    else{
+      formData.append("file", file);
+    }
+    
     console.log(formToJSON(formData))
     try {
       

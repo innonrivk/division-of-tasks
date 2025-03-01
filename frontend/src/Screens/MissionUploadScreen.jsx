@@ -43,9 +43,7 @@ function MissionUploadScreen() {
     <div className="container-mission-upload">
       <button className="go-back-btn" onClick={() => navigate(-1)}> חזור</button>
       <div className='mission-panel-container'>
-        {/* <div className='create-mission-btn'>
-            <button>Create Mission</button>
-        </div> */}
+   
         <div className='main-erea-fragment'>
           <MainPanelFrag editChosenCard={editChosenCard} missionsJson={missionJson} setMissionJson={updateMissionJson}></MainPanelFrag>
         </div>
