@@ -169,8 +169,22 @@ class DatabaseManager {
                 WHERE is_in_mission=1;`, (error) => {
                     if(error) {
                         reject(new errCon.DatabaseError(error, 500))
+                    } else {
+                        resolve()
                     }
                 })
+        })
+    }
+
+    static getFrames() {
+        return new Promise((resolve, reject) => {
+            db.all(`SELECT DISTINCT frame FROM soliders;`, (error, rows) => {
+                if(error) {
+                    reject(new errCon.DatabaseError(error, 500))
+                } else {
+                    resolve(rows)
+                }
+            })
         })
     }
 
@@ -239,6 +253,52 @@ class DatabaseManager {
                 } else {
                     resolve(rows)
                 }
+            })
+        })
+    }
+
+    static createCurrentSolidersForMissionsTable(solidersWithMission) {
+        return new Promise((resolve, reject) => {
+            db.serialize(() => {
+                db.run(`DROP TABLE IF EXISTS currentSolidersForMissions;`)
+
+                db.run(`CREATE TABLE IF NOT EXISTS currentSolidersForMissions (
+                    id INTEGER NOT NULL PRIMARY KEY,
+                    full_name Ntext NOT NULL,
+                    mission_name Ntext NOT NULL,
+                    mission_id INTEGER NOT NULL);`, (error) => {
+                        if (error) {
+                            reject(new errCon.DatabaseError(error, 500))
+                        }
+                })
+
+                const stmt = db.prepare(`INSERT INTO currentSolidersForMissions (
+                    id,
+                    full_name,
+                    mission_name,
+                    mission_id) VALUES (?, ?, ?, ?);`)
+                
+                solidersWithMission.forEach(solider => {
+                    stmt.run(
+                        solider["id"],
+                        solider["full_name"],
+                        solider["mission_name"],
+                        solider["mission_id"],
+                        (error) => {
+                            if (error) {
+                                reject(error)
+                            }
+                        }
+                    )
+                })
+
+                stmt.finalize((error) => {
+                    if (error) {
+                        reject(new errCon.DatabaseError(error, 500))
+                    } else {
+                        resolve({message: "table created successfully"})
+                    }
+                })
             })
         })
     }

@@ -2,10 +2,8 @@ const xl = require('exceljs')
 const algo = require("./algo")
 const randColor = require('randomcolor')
 
-async function excelGenerator() {
+async function excelGenerator(solidersForMission) {
     try{
-        let solidersForMission = await algo.main()
-
         const workbook = new xl.Workbook()
         const worksheet = workbook.addWorksheet('חיילים')
 

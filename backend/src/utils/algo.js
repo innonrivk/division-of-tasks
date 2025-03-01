@@ -9,6 +9,7 @@ class algo{
             missions = await utils.updatePerc(missions)     // updating percentage from string to json and percentage into actual number of people needed for the job
 
             let solidersForMission = {}
+            let solidersWithMission = []
 
             for(var i = 0; i < missions.length; i++){
                 for(var j = 0; j < missions[i].percentage.length; j++){
@@ -25,6 +26,12 @@ class algo{
                         solidersForMission[key] = {}
                     }
 
+                    soliders.forEach(solider => {
+                        solider["mission_id"] = missions[i].id
+                        solider["mission_name"] = missions[i].name
+                        solidersWithMission.push(solider)
+                    })
+                    
                     for(var k = 0; k < soliders.length; k++){
                         let oldScore = await dbMan.getSoliderScoreById(soliders[k]["id"])
                         oldScore = oldScore[0]["score"]
@@ -42,16 +49,12 @@ class algo{
                 }
             }
             
-            dbMan.ZeroIsInMission()
+            await dbMan.ZeroIsInMission()
 
-            return solidersForMission
+            return [solidersForMission, solidersWithMission]
         } catch (e) {
             throw e
         }
-    }
-
-    static async updateCurrentAlgoResults(file) {
-
     }
 }
 

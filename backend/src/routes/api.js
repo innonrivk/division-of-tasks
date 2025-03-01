@@ -5,6 +5,7 @@ const path = require('path');
 const dbMan = require("../utils/dbMan");
 const parseExcel = require("../utils/excelParser");
 const gen = require("../utils/excelGen")
+const algo = require("../utils/algo")
 
 const upload = multer({
     dest: 'uploads/',
@@ -74,8 +75,11 @@ router.get('/missions', async(req, res) => {
 
 router.get('/excel', async(req, res) => {
     try{
-        await gen()
-        console.log("done")
+        let [solidersForMission, solidersWithMission] = await algo.main()
+
+        await dbMan.createCurrentSolidersForMissionsTable(solidersWithMission)
+        await gen(solidersForMission)
+
         const excelFilePath = path.join(__dirname, '../../uploads/sample.xlsx')
         res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         res.setHeader("Content-Disposition", "attachment; filename=sample.xlsx");
@@ -83,6 +87,15 @@ router.get('/excel', async(req, res) => {
     } catch (err) {
         console.log(err)
         res.status(500).send(err)
+    }
+})
+
+router.get('/frames', async(req, res) => {
+    try{
+        const frames = await dbMan.getFrames()
+        res.status(200).send(frames)
+    } catch (e) {
+        res.status(500).send(e)
     }
 })
 
