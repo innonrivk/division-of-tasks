@@ -9,12 +9,14 @@ class BackendCommunication {
     static async postDataForm( formData  , cbFuncLoader = null) {
       var response, apiUrl;
       var jsonDataType = Object.keys(formToJSON(formData))[0] 
-      
+
+      console.log(jsonDataType)
       // check which api should be used
       if (jsonDataType == "file"){
         apiUrl = this.FILES_UPDATED_API_URL;
       }
-      else if (jsonDataType == "updated-file") {
+      else if (jsonDataType == "updated") {
+        console.log("fff" , jsonDataType)
         apiUrl = this.EXCEL_API_URL;
       }
       else{

@@ -21,7 +21,7 @@ const FileUploader = (props) => {
     const formData = new FormData();
     //  diffrentiating between uplaod updated file and uploading new names file  
     if(props.isUpdateFile){
-      formData.append("updated-file", file);
+      formData.append("updated", file);
     }
     else{
       formData.append("file", file);
