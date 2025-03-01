@@ -1,6 +1,8 @@
 const xl = require('exceljs')
-const algo = require("./algo")
+const dbMan = require('./dbMan')
 const randColor = require('randomcolor')
+const path = require('path')
+const { stringify } = require('querystring')
 
 async function excelGenerator(solidersForMission) {
     try{
@@ -107,7 +109,12 @@ async function excelGenerator(solidersForMission) {
             rowIndex++  //space between groups
         }
 
-        await workbook.xlsx.writeFile('./uploads/sample.xlsx')
+        const today = new Date()
+        const formattedDate = today.toISOString().split('T')[0].replaceAll('-', '_')
+        let fileName = `excel_${formattedDate}.xlsx`
+        await workbook.xlsx.writeFile(`./src/db/excel_results/${fileName}`)
+
+        return {name: fileName, full_path: `../db/excel_results/${fileName}`}
     } catch(e) {
         throw e
     }

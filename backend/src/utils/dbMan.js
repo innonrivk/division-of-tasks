@@ -257,16 +257,18 @@ class DatabaseManager {
         })
     }
 
-    static createCurrentSolidersForMissionsTable(solidersWithMission) {
+    static createCurrentSolidersForMissionsTable(solidersWithMission, id) {
         return new Promise((resolve, reject) => {
             db.serialize(() => {
+                console.log("---------------------------------")
                 db.run(`DROP TABLE IF EXISTS currentSolidersForMissions;`)
 
                 db.run(`CREATE TABLE IF NOT EXISTS currentSolidersForMissions (
                     id INTEGER NOT NULL PRIMARY KEY,
                     full_name Ntext NOT NULL,
                     mission_name Ntext NOT NULL,
-                    mission_id INTEGER NOT NULL);`, (error) => {
+                    mission_id INTEGER NOT NULL,
+                    excel_id INTEGER DEFUALT 0);`, (error) => {
                         if (error) {
                             reject(new errCon.DatabaseError(error, 500))
                         }
@@ -276,7 +278,8 @@ class DatabaseManager {
                     id,
                     full_name,
                     mission_name,
-                    mission_id) VALUES (?, ?, ?, ?);`)
+                    mission_id,
+                    excel_id) VALUES (?, ?, ?, ?, ?);`)
                 
                 solidersWithMission.forEach(solider => {
                     stmt.run(
@@ -284,9 +287,10 @@ class DatabaseManager {
                         solider["full_name"],
                         solider["mission_name"],
                         solider["mission_id"],
+                        id,
                         (error) => {
                             if (error) {
-                                reject(error)
+                                reject(new errCon.DatabaseError(error, 500))
                             }
                         }
                     )
@@ -299,6 +303,118 @@ class DatabaseManager {
                         resolve({message: "table created successfully"})
                     }
                 })
+            })
+        })
+    }
+
+    static getExcelId() {
+        return new Promise((resolve, reject) => {
+            db.all(`SELECT excel_id FROM currentSolidersForMissions GROUP BY excel_id HAVING COUNT(excel_id) > 1;`, (e, num) => {
+                if (e) {
+                    reject(new errCon.DatabaseError(e, 500))
+                } else {
+                    resolve(num)
+                }
+            })
+        })
+    }
+
+    static isExist(fileName) {
+        return new Promise((resolve, reject) => {
+            db.all(`SELECT COUNT(1)
+                FROM currentSolidersForMissions
+                WHERE name=${fileName};`, (error, num) => {
+                        if (error) {
+                            reject(new errCon.DatabaseError(error, 500))
+                        } else {
+                            resolve(num)
+                        }
+                    })
+        })
+    }
+
+    static getTableSoliderWithMission() {
+        return new Promise((resolve, reject) => {
+            db.all(`SELECT * FROM currentSolidersForMissions`, (error, rows) => {
+                if (error) {
+                    reject(new errCon.DatabaseError(error, 500))
+                } else {
+                    resolve(rows)
+                }
+            })
+        })
+    }
+
+    static createExcelTable(excel_file) {
+        return new Promise((resolve, reject) => {
+            db.serialize(() => {
+                db.run(`CREATE TABLE IF NOT EXISTS excelTable (
+                    id INTEGER PRIMARY KEY,
+                    name Ntext UNIQUE NOT NULL,
+                    full_path Ntext UNIQUE NOT NULL);`, (error) => {
+                        if (error) {
+                            reject(new errCon.DatabaseError(error, 500))
+                        }
+                })
+
+                const stmt = db.prepare(`INSERT INTO excelTable (
+                    name,
+                    full_path) VALUES (?, ?);`)
+                
+                stmt.run(
+                    excel_file["name"],
+                    excel_file["full_path"],
+                    (error) => {
+                        if (error) {
+                            reject(new errCon.DatabaseError(error, 500))
+                        }
+                    }
+                )
+
+                stmt.finalize((error) => {
+                    if (error) {
+                        reject(new errCon.DatabaseError(error, 500))
+                    } else {
+                        resolve("done")
+                    }
+                })
+            })
+        })
+    }
+
+    static getIdByName(name) {
+        return new Promise((resolve, reject) => {
+            db.all(`SELECT id FROM excelTable
+                WHERE name=${name}`, (error, id) => {
+                        if (error) {
+                            reject(new errCon.DatabaseError(error, 500))
+                        } else {
+                            resolve(id)
+                        }
+                    })
+        })
+    }
+
+    static getExcelTable() {
+        return new Promise((resolve, reject) => {
+            db.all(`SELECT * FROM excelTable`, (error, rows) => {
+                if (error) {
+                    reject(new errCon.DatabaseError(error, 500))
+                } else {
+                    resolve(rows)
+                }
+            })
+        })
+    }
+
+    static getExcelFile(id) {
+        return new Promise((resolve, reject) => {
+            db.all(`SELECT * FROM excelTable WHERE id=${id}`, (error, row) => {
+                if (error) {
+                    reject(new errCon.DatabaseError(error, 500))
+                } else {
+                    resolve(row)
+                }
             })
         })
     }

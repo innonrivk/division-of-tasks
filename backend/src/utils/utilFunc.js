@@ -1,5 +1,6 @@
 const errCon = require('./errorTypes')
 const fs = require('fs');
+const dbMan = require("./dbMan")
 
 class utils{
     static unlinkFile(req) {
@@ -77,6 +78,19 @@ class utils{
             return perc
         } catch (err) {
             throw err
+        }
+    }
+
+    static async saveResultsToDB(excel_file, solidersWithMission){
+        try{
+            const done = await dbMan.createExcelTable(excel_file)
+            const id = await dbMan.getIdByName(`${excel_file["name"]}`)
+            const wait = await dbMan.createCurrentSolidersForMissionsTable(solidersWithMission, id)
+            console.log("_____________________נםט_____________________")
+            console.log(wait)
+            return
+        } catch(e) {
+            throw e
         }
     }
 }

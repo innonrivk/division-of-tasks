@@ -7,6 +7,7 @@ const parseExcel = require("../utils/excelParser");
 const gen = require("../utils/excelGen")
 const algo = require("../utils/algo")
 const utils = require("../utils/utilFunc")
+const fs = require("fs")
 
 const upload = multer({
     dest: 'uploads/',
@@ -79,19 +80,39 @@ router.get('/missions', async(req, res) => {
     }
 })
 
+router.get('/algo', async(req, res) => {
+    try{
+        const today = new Date()
+        const formattedDate = today.toISOString().split('T')[0].replaceAll('-', '_')
+        let fileName = `excel_${formattedDate}.xlsx`
+        const fileExists = async path => !!(await fs.promises.stat(path).catch(e => false));
+        const result = await fileExists(`../db/excel_results/${fileName}`)
+        if(result) {
+            console.log("help")
+            let [solidersForMission, solidersWithMission] = await algo.main()
+            const excel_file = await gen(solidersForMission)
+            const g = await utils.saveResultsToDB(excel_file, solidersWithMission)
+            res.status(200).send("done")
+        } else {
+            console.log("pks")
+            res.status(200).send("done")
+        }
+    } catch(e) {
+        console.log(e)
+        res.status(500).send(e)
+    }
+})
+
 router.get('/excel', async(req, res) => {
     try{
-        let [solidersForMission, solidersWithMission] = await algo.main()
-
-        await dbMan.createCurrentSolidersForMissionsTable(solidersWithMission)
-        await gen(solidersForMission)
-
-        const excelFilePath = path.join(__dirname, '../../uploads/sample.xlsx')
+        const excel_id = await dbMan.getExcelId()
+        const excel_file = await dbMan.getExcelFile(excel_id)
+        console.log(excel_file)
         res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        res.setHeader("Content-Disposition", "attachment; filename=sample.xlsx");
-        res.status(200).sendFile(excelFilePath)
+        res.setHeader("Content-Disposition", `attachment; excel_file=${excel_file.name}`);
+        res.status(200).sendFile(path.join(__dirname, excel_file.full_path))
     } catch (err) {
-        console.log(err)
+        console.error(err)
         res.status(500).send(err)
     }
 })
@@ -101,6 +122,25 @@ router.get('/frames', async(req, res) => {
         const frames = await dbMan.getFrames()
         res.status(200).send(frames)
     } catch (e) {
+        res.status(500).send(e)
+    }
+})
+
+router.get('/excelTable', async(req, res) => {
+    try{
+        const frames = await dbMan.getExcelTable()
+        res.status(200).send(frames)
+    } catch (e) {
+        res.status(500).send(e)
+    }
+})
+
+router.get('/solidersWith', async(req, res) => {
+    try{
+        const frames = await dbMan.getTableSoliderWithMission()
+        res.status(200).send(frames)
+    } catch (e) {
+        console.log(e)
         res.status(500).send(e)
     }
 })
